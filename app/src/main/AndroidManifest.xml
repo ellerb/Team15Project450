@@ -21,7 +21,15 @@
         <activity
             android:name=".AnotherActivity"
             android:label="@string/title_activity_another"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".CreateTourActivity"
+            android:label="Create a Tour" >
+        </activity>
+        <activity android:name=".ViewCreatedToursActivity"
+            android:label="View Created Tours"/>
+        <activity android:name=".BrowseToursActivity"
+            android:label="Browse Tours" >
+        </activity>
     </application>
 
 </manifest>

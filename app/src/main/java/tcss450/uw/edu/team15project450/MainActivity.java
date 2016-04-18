@@ -1,5 +1,6 @@
 package tcss450.uw.edu.team15project450;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -48,5 +49,20 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void goCreateTour(View view) {
+        Intent createIntent = new Intent(this, CreateTourActivity.class);
+        startActivity(createIntent);
+    }
+
+    public void goViewCreatedTours(View view) {
+        Intent viewCreatedIntent = new Intent(this, ViewCreatedToursActivity.class);
+        startActivity(viewCreatedIntent);
+    }
+
+    public void goBrowseTours(View view) {
+        Intent browseIntent = new Intent(this, BrowseToursActivity.class);
+        startActivity(browseIntent);
     }
 }
