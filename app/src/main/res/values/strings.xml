@@ -6,6 +6,15 @@
     <!--For the MainActivity-->
     <string name="title_activity_main">MainActivity</string>
     <string name="button_text_create_a_tour">CREATE A TOUR</string>
-    <string name="button_text_view_created_tours">VIEW CREATED TOURS</string>
-    <string name="button_text_browse_tours">BROWSE TOURS</string>
+    <string name="button_text_view_created_tours">VIEW TOURS CREATED BY YOU</string>
+    <string name="button_text_browse_tours">FIND AVAILABLE TOURS</string>
+
+    <!--For the CreateTourActivity-->
+    <string name="create_tour_form_instructions">Complete all fields to create a new tour:</string>
+    <string name="create_tour_form_title_background_text">Title</string>
+    <string name="create_tour_form_description_background_text">Description</string>
+    <string name="create_tour_form_add_audio_description">Add an audio description of tour?</string>
+    <string name="create_tour_form_add_image">Add an image for the tour cover?</string>
+    <string name="create_tour_form_private_or_public">Make tour public?</string>
+    <string name="create_tour_button">Create Tour</string>
 </resources>
