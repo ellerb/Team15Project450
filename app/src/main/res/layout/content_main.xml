@@ -14,26 +14,26 @@
     tools:showIn="@layout/activity_main">
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Create a Tour"
+        android:text="@string/button_text_create_a_tour"
         android:id="@+id/create_tour_btn"
         android:onClick="goCreateTour"/>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="View Created Tours"
+        android:text="@string/button_text_view_created_tours"
         android:id="@+id/view_created_btn"
         android:onClick="goViewCreatedTours"/>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Browse Tours"
+        android:text="@string/button_text_browse_tours"
         android:id="@+id/browse_btn"
         android:onClick="goBrowseTours"/>
 
