@@ -1,33 +1,23 @@
 package tcss450.uw.edu.team15project450.model;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Gabe on 4/28/2016.
  */
-public class Tour implements Serializable {
+public class Place implements Serializable {
     private String mTitle;
     private String mDescription;
-    //private Audio mTourAudioDescription;
-    //private Image mTourImage;
-    private ArrayList<Place> mPlaceList;
-    private boolean mIsPublic;
-    private boolean mIsPublished;
+    private String mInstruction;
+    //private mLocation;
+    //private Audio mAudio;
+    //private Image mImage;
 
-    public Tour(String title, String description
-            , ArrayList<Place> placeList, boolean isPublic
-            , boolean isPublished) {
+    public Place(String title, String description
+            , String instruction) {
         setTitle(title);
         setDescription(description);
-        mPlaceList = placeList;
-        mIsPublic = isPublic;
-        mIsPublished = isPublished;
+        mInstruction = instruction;
     }
 
     public String getTitle() { return mTitle; }
@@ -48,23 +38,16 @@ public class Tour implements Serializable {
         mDescription = description;
     }
 
-    public ArrayList<Place> getPlaceList() { return mPlaceList; }
+    public String getInstruction() { return mInstruction; }
 
-    public void setPlaceList(ArrayList<Place> tourPlaceList) {
-        mPlaceList = tourPlaceList;
+    public void setInstruction(String instruction) {
+        mInstruction = instruction;
     }
-
-    public boolean getIsPublic() { return mIsPublic; }
-
-    public void setIsPublic(boolean isPublic) { mIsPublic = isPublic; }
-
-    public boolean getIsPublished() { return mIsPublished; }
-
-    public void setIsPublished(boolean isPublished) { mIsPublished = isPublished; }
 
     @Override
     public String toString() {
-        return "Title: " + mTitle + " Description: " + mDescription;
+        return "Title: " + mTitle + " Description: " + mDescription
+                + "Instruction: " + mInstruction;
     }
 
     /**
