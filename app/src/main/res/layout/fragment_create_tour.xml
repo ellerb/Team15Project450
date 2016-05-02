@@ -1,0 +1,67 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="tcss450.uw.edu.team15project450.CreateTourActivity">
+
+    <TextView
+        android:id="@+id/AddTourInstruction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/create_tour_form_instructions"
+        android:textSize="10pt">
+    </TextView>
+
+    <EditText
+        android:id="@+id/AddTourTitle"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:hint="@string/create_tour_form_title_background_text">
+    </EditText>
+
+    <EditText
+        android:id="@+id/AddTourDescription"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:hint="@string/create_tour_form_description_background_text"
+        android:inputType="textMultiLine"
+        android:lines="5">
+    </EditText>
+
+    <CheckBox
+        android:id="@+id/AddAudioDescriptionCheckBoxResponse"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:text="@string/create_tour_form_add_audio_description">
+    </CheckBox>
+
+    <CheckBox
+        android:id="@+id/AddImageCheckBoxResponse"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:text="@string/create_tour_form_add_image">
+    </CheckBox>
+
+    <CheckBox
+        android:id="@+id/PublicCheckBoxResponse"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:text="@string/create_tour_form_private_or_public">
+    </CheckBox>
+
+    <Button
+        android:id="@+id/ButtonCreateTour"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:text="@string/create_tour_button"
+        android:onClick="createNewTour">
+    </Button>
+
+</LinearLayout>
