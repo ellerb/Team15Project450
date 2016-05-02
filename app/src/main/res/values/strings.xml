@@ -9,13 +9,35 @@
     <string name="button_text_browse_tours">FIND AVAILABLE TOURS</string>
 
     <!--For the CreateTourActivity-->
+
+    <!--For the CreateTourFragment-->
     <string name="create_tour_form_instructions">Complete all fields to create a new tour:</string>
     <string name="create_tour_form_title_background_text">Title</string>
     <string name="create_tour_form_description_background_text">Description</string>
-    <string name="create_tour_form_add_audio_description">Add an audio description of tour?</string>
-    <string name="create_tour_form_add_image">Add an image for the tour cover?</string>
+    <string name="create_tour_form_add_audio_description">Add audio description of tour?</string>
+    <string name="create_tour_form_add_image">Add image for the tour cover?</string>
     <string name="create_tour_form_private_or_public">Make tour public?</string>
-    <string name="create_tour_button">Create Tour</string>
+    <string name="create_tour_button">CREATE TOUR</string>
+
+    <!--For the AddPlaceFragment-->
+    <string name="add_place_form_instructions">Complete form to add a new place to your tour:</string>
+    <string name="add_place_form_title_background_text">Title</string>
+    <string name="add_place_form_description_background_text">Description</string>
+    <string name="add_place_form_instruction_background_text">Instruction (optional)</string>
+    <string name="add_place_form_location_background_text">Location</string>
+    <string name="add_place_form_add_audio_description">Add audio track?</string>
+    <string name="add_place_form_add_image">Add image?</string>
+    <string name="add_place_button">ADD PLACE</string>
+
+    <!--For the AddAudioFragment-->
+    <string name="tour_title">PLACEHOLDER</string>
+    <string name="place_title">PLACEHOLDER</string>
+    <string name="place_description">PLACEHOLDER</string>
+    <string name="place_location">PLACEHOLDER</string>
+    <string name="add_audio_button">ADD AUDIO</string>
+
+    <!--For the AddImageFragment-->
+    <string name="add_image_button">ADD IMAGE</string>
 
     <!--For the authenticate-->
     <string name="username_hint">Enter your username</string>
@@ -31,5 +53,8 @@
     <string name="reg_pwd_hint">Enter password</string>
     <string name="reg_name_hint">Enter your name</string>
     <string name="reg_add_user_btn">REGISTER</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
