@@ -19,7 +19,8 @@
         </activity>
         <activity
             android:name=".CreateTourActivity"
-            android:label="Create a Tour"></activity>
+            android:label="Create a Tour">
+        </activity>
         <activity
             android:name=".ViewCreatedToursActivity"
             android:label="View Created Tours" />
@@ -30,7 +31,6 @@
             android:name=".authenticate.SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

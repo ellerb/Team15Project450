@@ -60,8 +60,7 @@
         android:id="@+id/ButtonCreateTour"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:text="@string/create_tour_button"
-        android:onClick="createNewTour">
+        android:text="@string/create_tour_button">
     </Button>
 
 </LinearLayout>

@@ -41,36 +41,42 @@
         android:layout_width="fill_parent"
         android:hint="@string/add_place_form_instruction_background_text"
         android:inputType="textMultiLine"
-        android:lines="4">
+        android:lines="2">
     </EditText>
 
     <EditText
-        android:id="@+id/AddPlaceLocation"
+        android:id="@+id/AddPlaceLongitude"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:hint="@string/add_place_form_location_background_text">
+        android:hint="@string/add_place_form_longitude_background_text">
+    </EditText>
+
+    <EditText
+        android:id="@+id/AddPlaceLatitude"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:hint="@string/add_place_form_latitude_background_text">
     </EditText>
 
     <CheckBox
-        android:id="@+id/AddAudioDescriptionCheckBoxResponse"
+        android:id="@+id/AddAudioPlaceCheckBoxResponse"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
         android:text="@string/add_place_form_add_audio_description">
     </CheckBox>
 
     <CheckBox
-        android:id="@+id/AddImageCheckBoxResponse"
+        android:id="@+id/AddImagePlaceCheckBoxResponse"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
         android:text="@string/add_place_form_add_image">
     </CheckBox>
 
     <Button
-        android:id="@+id/ButtonCreateTour"
+        android:id="@+id/ButtonAddPlace"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:text="@string/add_place_button"
-        android:onClick="addPlace">
+        android:text="@string/add_place_button">
     </Button>
 
 </LinearLayout>

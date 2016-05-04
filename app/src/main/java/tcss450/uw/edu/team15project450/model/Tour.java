@@ -12,6 +12,7 @@ import java.util.List;
  * Created by Gabe on 4/28/2016.
  */
 public class Tour implements Serializable {
+    private int mID;
     private String mTitle;
     private String mDescription;
     //private Audio mTourAudioDescription;
@@ -19,15 +20,18 @@ public class Tour implements Serializable {
     private ArrayList<Place> mPlaceList;
     private boolean mIsPublic;
     private boolean mIsPublished;
+    private String mUserID;
 
-    public Tour(String title, String description
+    public Tour(int ID, String title, String description
             , ArrayList<Place> placeList, boolean isPublic
-            , boolean isPublished) {
+            , boolean isPublished, String userid) {
+        mID = ID;
         setTitle(title);
         setDescription(description);
         mPlaceList = placeList;
         mIsPublic = isPublic;
         mIsPublished = isPublished;
+        mUserID = userid;
     }
 
     public String getTitle() { return mTitle; }
@@ -61,6 +65,14 @@ public class Tour implements Serializable {
     public boolean getIsPublished() { return mIsPublished; }
 
     public void setIsPublished(boolean isPublished) { mIsPublished = isPublished; }
+
+    public int getID() { return mID; }
+
+    public void setID(int ID) { mID = ID; }
+
+    public String getUserID() { return mUserID; }
+
+    public void setUserID(String userID) { mUserID = userID; }
 
     @Override
     public String toString() {

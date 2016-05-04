@@ -99,6 +99,7 @@ public class SignInActivity extends AppCompatActivity
         }
 
         mSharedPreferences.edit().putBoolean(getString(R.string.LOGGEDIN), true).commit();
+        mSharedPreferences.edit().putString("userid", mUserId).commit();
     }
 
     private class LoginTask extends AsyncTask<String, Void, String> {
