@@ -148,9 +148,9 @@ public class AddPlaceFragment extends Fragment {
             sb.append("&long=");
             sb.append(URLEncoder.encode(placeLongitude, "UTF-8"));
 
-            //String tourTitle = mTour.getText().toString();
-            //sb.append("&tour=");
-            //sb.append(URLEncoder.encode(tourTitle, "UTF-8"));
+            String tourTitle = mTour;
+            sb.append("&tour=");
+            sb.append(URLEncoder.encode(tourTitle, "UTF-8"));
 
             String userid = mCreatedBy;
             sb.append("&userid=");
