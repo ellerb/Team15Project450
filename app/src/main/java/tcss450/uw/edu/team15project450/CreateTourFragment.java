@@ -1,9 +1,10 @@
 package tcss450.uw.edu.team15project450;
 
 import android.content.Context;
-import android.net.Uri;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +15,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.net.URLEncoder;
-import java.util.ArrayList;
-
-import tcss450.uw.edu.team15project450.model.Place;
 
 
 /**
@@ -34,6 +32,7 @@ public class CreateTourFragment extends Fragment {
     private CheckBox mHasAudio;
     private CheckBox mHasImage;
     private CheckBox mIsPublic;
+    private String mCreatedBy;
 
     public CreateTourFragment() {
         // Required empty public constructor
@@ -45,16 +44,46 @@ public class CreateTourFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_create_tour, container, false);
 
+        Bundle bundle = this.getArguments();
+
         mTitle = (EditText) view.findViewById(R.id.AddTourTitle);
         mDescription = (EditText) view.findViewById(R.id.AddTourDescription);
         mHasAudio = (CheckBox) view.findViewById(R.id.AddAudioDescriptionCheckBoxResponse);
         mHasImage = (CheckBox) view.findViewById(R.id.AddImageCheckBoxResponse);
         mIsPublic = (CheckBox) view.findViewById(R.id.PublicCheckBoxResponse);
+        mCreatedBy = bundle.getString("userid");
 
         Button createBasicTourButton = (Button) view.findViewById(R.id.ButtonCreateTour);
         createBasicTourButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String pTitle = mTitle.getText().toString();
+                String pDescription = mDescription.getText().toString();
+                if (TextUtils.isEmpty(pTitle)) {
+                    Toast.makeText(view.getContext(), "Enter title", Toast.LENGTH_SHORT).show();
+                    mTitle.requestFocus();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(pDescription)) {
+                    Toast.makeText(view.getContext(), "Enter description", Toast.LENGTH_SHORT).show();
+                    mDescription.requestFocus();
+                    return;
+
+                }
+                if (pTitle.length() > 25) {
+                    Toast.makeText(view.getContext(), "Title must be under 25 characters", Toast.LENGTH_SHORT)
+                            .show();
+                    mDescription.requestFocus();
+                    return;
+                }
+                if (pDescription.length() < 25) {
+                    Toast.makeText(view.getContext(), "Enter description of at least 25 characters", Toast.LENGTH_SHORT)
+                            .show();
+                    mDescription.requestFocus();
+                    return;
+                }
+
                 String url = buildCourseURL(view);
                 boolean bHasAudio = checkIfAudio();
                 boolean bHasImage = checkIfImage();
@@ -76,9 +105,21 @@ public class CreateTourFragment extends Fragment {
         }
     }
 
-    private boolean checkIfAudio() { return mHasAudio.isChecked(); }
+    private boolean checkIfAudio() {
+        // IF STATMENT IS FOR PHASE 1 ONLY
+        if (mHasAudio.isChecked()) {
+            mHasAudio.setChecked(false);
+        }
+        return mHasAudio.isChecked();
+    }
 
-    private boolean checkIfImage() { return mHasImage.isChecked(); }
+    private boolean checkIfImage() {
+        // IF STATMENT IS FOR PHASE 1 ONLY
+        if (mHasImage.isChecked()) {
+            mHasImage.setChecked(false);
+        }
+        return mHasImage.isChecked();
+    }
 
     private boolean checkIfPublic() { return mIsPublic.isChecked(); }
 
@@ -104,9 +145,9 @@ public class CreateTourFragment extends Fragment {
             sb.append("&isPublish=");
             sb.append(isPublished);
 
-//            String userid = ????;
-//            sb.append("&user=");
-//            sb.append(URLEncoder.encode(userid, "UTF-8"));
+            String userid = mCreatedBy;
+            sb.append("&userid=");
+            sb.append(URLEncoder.encode(userid, "UTF-8"));
 
             Log.i("CreateTourFragment", sb.toString());
 

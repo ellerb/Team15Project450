@@ -9,9 +9,11 @@ public class Place implements Serializable {
     private String mTitle;
     private String mDescription;
     private String mInstruction;
-    //private mLocation;
+    private int mLatitude;
+    private int mLongitude;
     //private Audio mAudio;
     //private Image mImage;
+    private int mTourID;
 
     public Place(String title, String description
             , String instruction) {

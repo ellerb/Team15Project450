@@ -38,9 +38,6 @@ public class SignInActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        LoginFragment loginFragment = new LoginFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, loginFragment).commit();
-
         mSharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS), Context.MODE_PRIVATE);
         if (!mSharedPreferences.getBoolean(getString(R.string.LOGGEDIN), false)) {
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new LoginFragment()).commit();
@@ -92,6 +89,7 @@ public class SignInActivity extends AppCompatActivity
         }
 
         mSharedPreferences.edit().putBoolean(getString(R.string.LOGGEDIN), true).commit();
+        mSharedPreferences.edit().putString("userid", mUserId).commit();
     }
 
     private class LoginTask extends AsyncTask<String, Void, String> {

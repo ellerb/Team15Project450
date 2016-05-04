@@ -1,12 +1,20 @@
 package tcss450.uw.edu.team15project450;
 
-import android.content.Context;
-import android.net.Uri;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+        import android.content.Context;
+        import android.net.Uri;
+        import android.os.Bundle;
+        import android.support.v4.app.Fragment;
+        import android.text.TextUtils;
+        import android.util.Log;
+        import android.view.LayoutInflater;
+        import android.view.View;
+        import android.view.ViewGroup;
+        import android.widget.Button;
+        import android.widget.CheckBox;
+        import android.widget.EditText;
+        import android.widget.Toast;
+
+        import java.net.URLEncoder;
 
 
 /**
@@ -14,47 +22,77 @@ import android.view.ViewGroup;
  */
 public class AddPlaceFragment extends Fragment {
 
+    private final static String ADD_PLACE_URL
+            = "http://cssgate.insttech.washington.edu/~glynng/Android/addPlace.php?";
+    //= "http://cssgate.insttech.washington.edu/~_450atm15/addPlace.php?";
+
     private AddPlaceListener mListener;
+    private EditText mTitle;
+    private EditText mDescription;
+    private EditText mInstruction;
+    private EditText mLongitude;
+    private EditText mLatitude;
+    private CheckBox mHasAudio;
+    private CheckBox mHasImage;
+    private String mTour;
+    private String mCreatedBy;
 
     public AddPlaceFragment() {
         // Required empty public constructor
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_place, container, false);
-    }
+        View view = inflater.inflate(R.layout.fragment_add_place, container, false);
 
-    public static final String ARG_POSITION = "POSITION";
-    private int mCurrentPosition = -1;
+        Bundle bundle = this.getArguments();
 
-    @Override
-    public void onStart() {
-        super.onStart();
+        mTitle = (EditText) view.findViewById(R.id.AddPlaceTitle);
+        mDescription = (EditText) view.findViewById(R.id.AddPlaceDescription);
+        mInstruction = (EditText) view.findViewById(R.id.AddPlaceInstruction);
+        mLatitude = (EditText) view.findViewById(R.id.AddPlaceLatitude);
+        mLongitude = (EditText) view.findViewById(R.id.AddPlaceLongitude);
+        mHasAudio = (CheckBox) view.findViewById(R.id.AddAudioPlaceCheckBoxResponse);
+        mHasImage = (CheckBox) view.findViewById(R.id.AddImagePlaceCheckBoxResponse);
+        mTour = bundle.getString("tourTitle");
+        mCreatedBy = bundle.getString("userid");
 
-        // During startup, check if there are arguments passed to the fragment.
-        // onStart is a good place to do this because the layout has already been
-        // applied to the fragment at this point so we can safely call the method
-        // below that sets the article text.
-        Bundle args = getArguments();
-        if (args != null) {
-            // Set article based on argument passed in
-            updateAddPlaceView(args.getInt(ARG_POSITION));
-        } else if (mCurrentPosition != -1) {
-            // Set article based on saved instance state defined during onCreateView
-            updateAddPlaceView(mCurrentPosition);
-        }
-    }
+        Button addPlaceButton = (Button) view.findViewById(R.id.ButtonAddPlace);
+        addPlaceButton.setOnClickListener(new View.OnClickListener() {
 
-    public void updateAddPlaceView(int position) {
-        // This is where I set text variables?
+            @Override
+            public void onClick(View view) {
+                String pTitle = mTitle.getText().toString();
+                String pLatitude = mLatitude.getText().toString();
+                String pLongitude = mLongitude.getText().toString();
+                if (TextUtils.isEmpty(pTitle)) {
+                    Toast.makeText(view.getContext(), "Enter title", Toast.LENGTH_SHORT).show();
+                    mTitle.requestFocus();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(pLatitude)) {
+                    Toast.makeText(view.getContext(), "Enter latitude", Toast.LENGTH_SHORT).show();
+                    mLatitude.requestFocus();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(pLongitude)) {
+                    Toast.makeText(view.getContext(), "Enter longitude", Toast.LENGTH_SHORT).show();
+                    mLongitude.requestFocus();
+                    return;
+                }
+
+                String url = buildCourseURL(view);
+                boolean bHasAudio = checkIfAudio();
+                boolean bHasImage = checkIfImage();
+                mListener.addPlace(url, bHasAudio, bHasImage);
+            }
+        });
+
+        return view;
     }
 
     @Override
@@ -68,23 +106,70 @@ public class AddPlaceFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+    private boolean checkIfAudio() {
+        // IF STATMENT IS FOR PHASE 1 ONLY
+        if (mHasAudio.isChecked()) {
+            mHasAudio.setChecked(false);
+        }
+        return mHasAudio.isChecked();
+    }
+
+    private boolean checkIfImage() {
+        // IF STATMENT IS FOR PHASE 1 ONLY
+        if (mHasImage.isChecked()) {
+            mHasImage.setChecked(false);
+        }
+        return mHasImage.isChecked();
+    }
+
+    private String buildCourseURL(View view) {
+
+        StringBuilder sb = new StringBuilder(ADD_PLACE_URL);
+
+        try {
+
+            String placeTitle = mTitle.getText().toString();
+            sb.append("title=");
+            sb.append(placeTitle);
+
+            String placeDesc = mDescription.getText().toString();
+            sb.append("&desc=");
+            sb.append(URLEncoder.encode(placeDesc, "UTF-8"));
+
+            String placeInstruction = mInstruction.getText().toString();
+            sb.append("&instruct=");
+            sb.append(URLEncoder.encode(placeInstruction, "UTF-8"));
+
+            String placeLatititude = mLatitude.getText().toString();
+            sb.append("&lat=");
+            sb.append(URLEncoder.encode(placeLatititude, "UTF-8"));
+
+            String placeLongitude = mLongitude.getText().toString();
+            sb.append("&long=");
+            sb.append(URLEncoder.encode(placeLongitude, "UTF-8"));
+
+            //String tourTitle = mTour.getText().toString();
+            //sb.append("&tour=");
+            //sb.append(URLEncoder.encode(tourTitle, "UTF-8"));
+
+            String userid = mCreatedBy;
+            sb.append("&userid=");
+            sb.append(URLEncoder.encode(userid, "UTF-8"));
+
+            Log.i("AddPlaceFragment", sb.toString());
+
+        }
+        catch(Exception e) {
+            Toast.makeText(view.getContext(), "Something wrong with the url" + e.getMessage(), Toast.LENGTH_LONG)
+                    .show();
+        }
+        return sb.toString();
     }
 
     /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
+     *
      */
     public interface AddPlaceListener {
-        void addPlace(String url);
+        void addPlace(String url, boolean hasAudio, boolean hasImage);
     }
 }

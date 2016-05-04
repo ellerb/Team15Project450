@@ -16,6 +16,8 @@ import tcss450.uw.edu.team15project450.authenticate.SignInActivity;
 
 public class MainActivity extends AppCompatActivity {
 
+    private SharedPreferences mSharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +60,28 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        mSharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS), Context.MODE_PRIVATE);
+//        if (mSharedPreferences.getBoolean(getString(R.string.LOGGEDIN), false)) {
+//            Intent i = new Intent(this, SignInActivity.class);
+//            startActivity(i);
+//            finish();
+//        }
+//    }
+//
+//    @Override
+//    public void onAttachedToWindow() {
+//        super.onAttachedToWindow();
+//        mSharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS), Context.MODE_PRIVATE);
+//        if (mSharedPreferences.getBoolean(getString(R.string.LOGGEDIN), false)) {
+//            Intent i = new Intent(this, SignInActivity.class);
+//            startActivity(i);
+//            finish();
+//        }
+//    }
 
     public void goCreateTour(View view) {
         Intent createIntent = new Intent(this, CreateTourActivity.class);
