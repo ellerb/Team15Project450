@@ -38,8 +38,8 @@ public class SignInActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        LoginFragment loginFragment = new LoginFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, loginFragment).commit();
+        /*LoginFragment loginFragment = new LoginFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, loginFragment).commit();*/
 
         mSharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS), Context.MODE_PRIVATE);
         if (!mSharedPreferences.getBoolean(getString(R.string.LOGGEDIN), false)) {
@@ -62,6 +62,13 @@ public class SignInActivity extends AppCompatActivity
         });
     }
 
+    /**
+     * An implementation of interaction between LoginFragment and this activity.
+     *
+     * @param url
+     * @param userId
+     * @param pwd
+     */
     public void login(String url, String userId, String pwd) {
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
@@ -79,6 +86,9 @@ public class SignInActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Stores the user's login information onto the device.
+     */
     public void addUserToLoginFile() {
         try {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(
@@ -153,12 +163,18 @@ public class SignInActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * An implementation of the interaction between RegisterFragment and this activity.
+     * @param url
+     */
     public void registerUser(String url) {
         RegisterUserTask task = new RegisterUserTask();
         task.execute(new String[] { url.toString() });
     }
 
-    // Inner class that allow us to call the service for registering a user.
+    /**
+     * This class allows us to call the service for registering a user.
+     */
     private class RegisterUserTask extends AsyncTask<String, Void, String> {
 
         @Override
