@@ -1,5 +1,6 @@
 # Team15Project450
 
+Phase 1
 
 Features Implemented:
 - Login
