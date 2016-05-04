@@ -46,6 +46,7 @@
     <string name="action_logout">LOG OUT</string>
     <string name="LOGIN_PREFS">tcss450.uw.edu.team15project450.PREFS</string>
     <string name="LOGGEDIN">loggedin</string>
+    <string name="LOGIN_FILE">tcss450.uw.edu.team15project450.LOGIN_FILE</string>
     <string name="register_btn">Register</string>
 
     <!--For the Register-->
@@ -54,7 +55,5 @@
     <string name="reg_name_hint">Enter your name</string>
     <string name="reg_add_user_btn">REGISTER</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

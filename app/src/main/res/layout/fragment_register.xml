@@ -23,8 +23,6 @@
         android:hint="@string/reg_pwd_hint"
         android:id="@+id/reg_pwd" />
 
-
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
