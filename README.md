@@ -6,6 +6,7 @@ Features Implemented:
 - Login
 - Register
 - Log out
+- Create a Tour
 
 Use Cases that have been implemented:
 - Register a User (Use Case 1)
