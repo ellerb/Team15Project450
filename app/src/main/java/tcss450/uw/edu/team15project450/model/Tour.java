@@ -1,14 +1,12 @@
 package tcss450.uw.edu.team15project450.model;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
+ * This model class will be used to create a Tour object. Audio and image not
+ * yet implemented.
+ *
  * Created by Gabe on 4/28/2016.
  */
 public class Tour implements Serializable {
@@ -79,28 +77,4 @@ public class Tour implements Serializable {
         return "Title: " + mTitle + " Description: " + mDescription;
     }
 
-    /**
-     * Parses the json string, returns an error message if unsuccessful.
-     * Returns course list if success.
-     * @param tourJSON
-     * @return reason or null if successful.
-     */
-//    public static String parseCourseJSON(String tourJSON, List<Tour> tourList) {
-//        String reason = null;
-//        if (tourJSON != null) {
-//            try {
-//                JSONArray arr = new JSONArray(tourJSON);
-//
-//                for (int i = 0; i < arr.length(); i++) {
-//                    JSONObject obj = arr.getJSONObject(i);
-//                    Tour course = new Tour(obj.getString(Tour.ID), obj.getString(Course.SHORT_DESC)
-//                            , obj.getString(Course.LONG_DESC), obj.getString(Course.PRE_REQS));
-//                    tourList.add(course);
-//                }
-//            } catch (JSONException e) {
-//                reason =  "Unable to parse data, Reason: " + e.getMessage();
-//            }
-//        }
-//        return reason;
-//    }
 }
