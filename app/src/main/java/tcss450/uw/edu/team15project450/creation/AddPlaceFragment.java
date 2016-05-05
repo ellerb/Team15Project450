@@ -1,24 +1,31 @@
-package tcss450.uw.edu.team15project450;
+package tcss450.uw.edu.team15project450.creation;
 
-        import android.content.Context;
-        import android.net.Uri;
-        import android.os.Bundle;
-        import android.support.v4.app.Fragment;
-        import android.text.TextUtils;
-        import android.util.Log;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.Button;
-        import android.widget.CheckBox;
-        import android.widget.EditText;
-        import android.widget.Toast;
+import android.content.Context;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.Toast;
 
-        import java.net.URLEncoder;
+import java.net.URLEncoder;
+
+import tcss450.uw.edu.team15project450.R;
 
 
 /**
+ * A fragment that will allow a user to add a place to a tour that the user created.
+ * Right now implementation only includes adding one place when CreateTourActivity
+ * is active. Will eventually be used to modify tours by allowing user to delete and
+ * create many in a row.
  *
+ * @author Gabrielle Bly, Gabrielle Glynn
+ * @version May 4, 2016
  */
 public class AddPlaceFragment extends Fragment {
 
@@ -34,17 +41,26 @@ public class AddPlaceFragment extends Fragment {
     private EditText mLatitude;
     private CheckBox mHasAudio;
     private CheckBox mHasImage;
-    private String mTour;
     private String mCreatedBy;
+    private String mTour;
 
     public AddPlaceFragment() {
         // Required empty public constructor
     }
 
+    /**
+     * Inflates the layout for this fragment as well as
+     * gets the info from the form created by the layout on button click
+     * as well as validates user data before being sent to the database.
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_place, container, false);
 
         Bundle bundle = this.getArguments();
@@ -56,8 +72,11 @@ public class AddPlaceFragment extends Fragment {
         mLongitude = (EditText) view.findViewById(R.id.AddPlaceLongitude);
         mHasAudio = (CheckBox) view.findViewById(R.id.AddAudioPlaceCheckBoxResponse);
         mHasImage = (CheckBox) view.findViewById(R.id.AddImagePlaceCheckBoxResponse);
-        mTour = bundle.getString("tourTitle");
+
+        // variables passed in by activity in order to get the info necessary to
+        // create unique rows in database table Place.
         mCreatedBy = bundle.getString("userid");
+        mTour = bundle.getString("tour");
 
         Button addPlaceButton = (Button) view.findViewById(R.id.ButtonAddPlace);
         addPlaceButton.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +103,18 @@ public class AddPlaceFragment extends Fragment {
                     mLongitude.requestFocus();
                     return;
                 }
+                if (pLatitude.length() > 25) {
+                    Toast.makeText(view.getContext(), "Latitude must be under 25 characters", Toast.LENGTH_SHORT)
+                            .show();
+                    mDescription.requestFocus();
+                    return;
+                }
+                if (pLongitude.length() > 25) {
+                    Toast.makeText(view.getContext(), "Longitude must be under 25 characters", Toast.LENGTH_SHORT)
+                            .show();
+                    mDescription.requestFocus();
+                    return;
+                }
 
                 String url = buildCourseURL(view);
                 boolean bHasAudio = checkIfAudio();
@@ -95,6 +126,10 @@ public class AddPlaceFragment extends Fragment {
         return view;
     }
 
+    /**
+     *
+     * @param context
+     */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -106,14 +141,25 @@ public class AddPlaceFragment extends Fragment {
         }
     }
 
+    /**
+     * Included if statement setting boolean value to false is only
+     * for phase 1 in order to prevent the audio fragment from being called.
+     *
+     * @return
+     */
     private boolean checkIfAudio() {
-        // IF STATMENT IS FOR PHASE 1 ONLY
         if (mHasAudio.isChecked()) {
             mHasAudio.setChecked(false);
         }
         return mHasAudio.isChecked();
     }
 
+    /**
+     * Included if statement setting boolean value to false is only
+     * for phase 1 in order to prevent the image fragment from being called.
+     *
+     * @return
+     */
     private boolean checkIfImage() {
         // IF STATMENT IS FOR PHASE 1 ONLY
         if (mHasImage.isChecked()) {
@@ -122,6 +168,13 @@ public class AddPlaceFragment extends Fragment {
         return mHasImage.isChecked();
     }
 
+    /**
+     * Builds the url with variables to pass to the php files
+     * on the server.
+     *
+     * @param view
+     * @return
+     */
     private String buildCourseURL(View view) {
 
         StringBuilder sb = new StringBuilder(ADD_PLACE_URL);
@@ -131,26 +184,32 @@ public class AddPlaceFragment extends Fragment {
             String placeTitle = mTitle.getText().toString();
             sb.append("title=");
             sb.append(placeTitle);
+            Log.i("AddPlaceFragment", sb.toString());
 
             String placeDesc = mDescription.getText().toString();
             sb.append("&desc=");
             sb.append(URLEncoder.encode(placeDesc, "UTF-8"));
+            Log.i("AddPlaceFragment", sb.toString());
 
             String placeInstruction = mInstruction.getText().toString();
             sb.append("&instruct=");
             sb.append(URLEncoder.encode(placeInstruction, "UTF-8"));
+            Log.i("AddPlaceFragment", sb.toString());
 
             String placeLatititude = mLatitude.getText().toString();
             sb.append("&lat=");
             sb.append(URLEncoder.encode(placeLatititude, "UTF-8"));
+            Log.i("AddPlaceFragment", sb.toString());
 
             String placeLongitude = mLongitude.getText().toString();
             sb.append("&long=");
             sb.append(URLEncoder.encode(placeLongitude, "UTF-8"));
+            Log.i("AddPlaceFragment", sb.toString());
 
-            String tourTitle = mTour;
+            String tTitle = mTour;
             sb.append("&tour=");
-            sb.append(URLEncoder.encode(tourTitle, "UTF-8"));
+            sb.append(URLEncoder.encode(tTitle, "UTF-8"));
+            Log.i("AddPlaceFragment", sb.toString());
 
             String userid = mCreatedBy;
             sb.append("&userid=");
@@ -167,7 +226,10 @@ public class AddPlaceFragment extends Fragment {
     }
 
     /**
-     *
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
      */
     public interface AddPlaceListener {
         void addPlace(String url, boolean hasAudio, boolean hasImage);

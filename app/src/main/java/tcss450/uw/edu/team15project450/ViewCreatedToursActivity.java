@@ -10,6 +10,13 @@ import android.view.MenuItem;
 
 import tcss450.uw.edu.team15project450.authenticate.SignInActivity;
 
+/**
+ * This activity is currently a shell to be implemented later. Will allow
+ * a user to see all the tours they have created and select them to edit.
+ *
+ * @author Gabrielle Bly, Gabrielle Glynn
+ * @version May 4, 2016
+ */
 public class ViewCreatedToursActivity extends AppCompatActivity {
 
     @Override

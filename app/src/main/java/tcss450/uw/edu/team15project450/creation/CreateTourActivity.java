@@ -1,4 +1,4 @@
-package tcss450.uw.edu.team15project450;
+package tcss450.uw.edu.team15project450.creation;
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,8 +21,19 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import tcss450.uw.edu.team15project450.MainActivity;
+import tcss450.uw.edu.team15project450.R;
 import tcss450.uw.edu.team15project450.authenticate.SignInActivity;
 
+/**
+ * This class is an Activity that allows a user to create their own tour.
+ * It may call up to four difference fragments including: CreateTourFragment,
+ * AddAudioFragment (not implemented), AddPlaceFragment (not implemented), and
+ * AddPlaceFragment. The basic
+ *
+ * @author Gabrielle Bly, Gabrielle Glynn
+ * @version May 4, 2016
+ */
 public class CreateTourActivity extends AppCompatActivity
         implements CreateTourFragment.CreateBasicTourListener
         , AddAudioFragment.AddAudioListener
@@ -31,10 +42,11 @@ public class CreateTourActivity extends AppCompatActivity
 
     private SharedPreferences mSharedPreference;
     private String mUserID;
-    private String mTourTitle;
 
     /**
-     *
+     * This initial onCreate method will get and set userid, which is passed
+     * to other fragments in order to add to database, and calls the iniital fragment,
+     * CreateTourFragment.
      * @param savedInstanceState
      */
      @Override
@@ -44,7 +56,7 @@ public class CreateTourActivity extends AppCompatActivity
         setContentView(R.layout.activity_create_tour);
 
         mSharedPreference = getSharedPreferences(getString(R.string.LOGIN_PREFS), Context.MODE_PRIVATE);
-        String mUserID = mSharedPreference.getString("userid", null);
+        mUserID = mSharedPreference.getString("userid", null);
 
         if (findViewById(R.id.fragment_container) != null) {
             Bundle bundle = new Bundle();
@@ -58,6 +70,7 @@ public class CreateTourActivity extends AppCompatActivity
     }
 
     /**
+     * Adds menu options.
      *
      * @param menu
      * @return
@@ -70,6 +83,8 @@ public class CreateTourActivity extends AppCompatActivity
     }
 
     /**
+     * Method adds a logout button, changes shared preferences when clicked
+     * and calls new SignInActivity.
      *
      * @param item
      * @return
@@ -102,13 +117,19 @@ public class CreateTourActivity extends AppCompatActivity
     }
 
     /**
+     * Will execute task and call AddAudioFragment, AddImageFragment
+     * or AddPlaceFragment upon result depending on booleans hasAudio hasImage.
+     * Also uses parameter tourTitle to pass to AddPlaceFragment so it can store
+     * the correct reference info in the database in order to be associated with
+     * the created tour.
      *
      * @param url
      * @param hasAudio
      * @param hasImage
+     * @param tourTitle
      */
      @Override
-    public void createBasicTour(String url, boolean hasAudio, boolean hasImage) {
+    public void createBasicTour(String url, boolean hasAudio, boolean hasImage, String tourTitle) {
 
         CreateTourTask task = new CreateTourTask();
         task.execute(new String[]{url.toString()});
@@ -135,7 +156,7 @@ public class CreateTourActivity extends AppCompatActivity
             if (findViewById(R.id.fragment_container) != null) {
                 Bundle bundle = new Bundle();
                 bundle.putString("userid", mUserID);
-                bundle.putString("tourTitle", mTourTitle);
+                bundle.putString("tour", tourTitle);
                 AddPlaceFragment addPlaceFragment = new AddPlaceFragment();
                 addPlaceFragment.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction()
@@ -147,6 +168,8 @@ public class CreateTourActivity extends AppCompatActivity
     }
 
     /**
+     * Not fully implemented, will execute task and call AddImageFragment
+     * or AddPlaceFragment upon result depending on boolean hasImage.
      *
      * @param url
      * @param hasImage
@@ -170,7 +193,6 @@ public class CreateTourActivity extends AppCompatActivity
             if (findViewById(R.id.fragment_container) != null) {
                 Bundle bundle = new Bundle();
                 bundle.putString("userid", mUserID);
-                bundle.putString("tourTitle", mTourTitle);
                 AddPlaceFragment addPlaceFragment = new AddPlaceFragment();
                 addPlaceFragment.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction()
@@ -181,6 +203,8 @@ public class CreateTourActivity extends AppCompatActivity
     }
 
     /**
+     * Not fully implemented, will execute task and call AddPlaceFragment
+     * upon result.
      *
      * @param url
      */
@@ -193,7 +217,6 @@ public class CreateTourActivity extends AppCompatActivity
          if (findViewById(R.id.fragment_container) != null) {
              Bundle bundle = new Bundle();
              bundle.putString("userid", mUserID);
-             bundle.putString("tourTitle", mTourTitle);
              AddPlaceFragment addPlaceFragment = new AddPlaceFragment();
              addPlaceFragment.setArguments(bundle);
              getSupportFragmentManager().beginTransaction()
@@ -203,6 +226,8 @@ public class CreateTourActivity extends AppCompatActivity
     }
 
     /**
+     * Will execute task in order to add place to the database and at this
+     * time calls MainActivity no matter the result.
      *
      * @param url
      * @param hasAudio
@@ -214,7 +239,7 @@ public class CreateTourActivity extends AppCompatActivity
          CreateTourTask task = new CreateTourTask();
          task.execute(new String[]{url.toString()});
 
-         Intent viewCreatedIntent = new Intent(this, ViewCreatedToursActivity.class);
+         Intent viewCreatedIntent = new Intent(this, MainActivity.class);
          startActivity(viewCreatedIntent);
      }
 
@@ -260,7 +285,9 @@ public class CreateTourActivity extends AppCompatActivity
         /**
          * It checks to see if there was a problem with the URL(Network) which is when an
          * exception is caught. It tries to call the parse Method and checks to see if it was successful.
-         * If not, it displays the exception.
+         * If not, it displays the exception. Since this is used by several fragments (only two
+         * currently implemented) it has personalized messages based on a type variable set in the
+         * php files on the server.
          *
          * @param result
          */
@@ -270,11 +297,9 @@ public class CreateTourActivity extends AppCompatActivity
             try {
                 JSONObject jsonObject = new JSONObject(result);
                 String status = (String) jsonObject.get("result");
+                Log.i("status", status);
                 String type = (String) jsonObject.get("type");
-
-                if(status.equals("success") && type.equals("createBasicTour")) {
-                    mTourTitle = (String) jsonObject.get("tourTitle");
-                }
+                Log.i("type", type);
                 if (status.equals("success")) {
                     String toastText;
                     if(type.equals("createBasicTour")) {

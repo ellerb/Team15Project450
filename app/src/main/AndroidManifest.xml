@@ -18,7 +18,7 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".CreateTourActivity"
+            android:name=".creation.CreateTourActivity"
             android:label="Create a Tour">
         </activity>
         <activity

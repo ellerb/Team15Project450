@@ -1,16 +1,21 @@
-package tcss450.uw.edu.team15project450;
+package tcss450.uw.edu.team15project450.creation;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import tcss450.uw.edu.team15project450.R;
 
 /**
+ * A fragment that will allow users to attach an audio file to either a
+ * tour or a place. This class is not * fully implemented; right now an
+ * instance is skipped by all relevant activities.
  *
+ * @author Gabrielle Bly, Gabrielle Glynn
+ * @version May 4, 2016
  */
 public class AddAudioFragment extends Fragment {
 
@@ -20,15 +25,17 @@ public class AddAudioFragment extends Fragment {
         // empty public constructor
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
+    /**
+     * Inflates the layout for fragment.
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_audio, container, false);
         return view;
 
@@ -81,10 +88,6 @@ public class AddAudioFragment extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
      */
     public interface AddAudioListener {
         void addTourAudio(String url, boolean hasImage);

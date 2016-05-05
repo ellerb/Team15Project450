@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -13,7 +11,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import tcss450.uw.edu.team15project450.authenticate.SignInActivity;
+import tcss450.uw.edu.team15project450.creation.CreateTourActivity;
 
+/**
+ * This activity serves as the homepage for the app. From here you can launch
+ * the three major activities: CreateTourActivity, BrowseToursActivity, and
+ * ViewCreatedToursActivity.
+ *
+ * @author Gabrielle Bly, Gabrielle Glynn
+ * @version May 4, 2016
+ */
 public class MainActivity extends AppCompatActivity {
 
     private SharedPreferences mSharedPreferences;
@@ -61,38 +68,31 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        mSharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS), Context.MODE_PRIVATE);
-//        if (mSharedPreferences.getBoolean(getString(R.string.LOGGEDIN), false)) {
-//            Intent i = new Intent(this, SignInActivity.class);
-//            startActivity(i);
-//            finish();
-//        }
-//    }
-//
-//    @Override
-//    public void onAttachedToWindow() {
-//        super.onAttachedToWindow();
-//        mSharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS), Context.MODE_PRIVATE);
-//        if (mSharedPreferences.getBoolean(getString(R.string.LOGGEDIN), false)) {
-//            Intent i = new Intent(this, SignInActivity.class);
-//            startActivity(i);
-//            finish();
-//        }
-//    }
-
+    /**
+     * Launches CreateTourActivity.
+     *
+     * @param view
+     */
     public void goCreateTour(View view) {
         Intent createIntent = new Intent(this, CreateTourActivity.class);
         startActivity(createIntent);
     }
 
+    /**
+     * Launches ViewCreatedToursActivity.
+     *
+     * @param view
+     */
     public void goViewCreatedTours(View view) {
         Intent viewCreatedIntent = new Intent(this, ViewCreatedToursActivity.class);
         startActivity(viewCreatedIntent);
     }
 
+    /**
+     * Launches BrowseToursActivity.
+     *
+     * @param view
+     */
     public void goBrowseTours(View view) {
         Intent browseIntent = new Intent(this, BrowseToursActivity.class);
         startActivity(browseIntent);
