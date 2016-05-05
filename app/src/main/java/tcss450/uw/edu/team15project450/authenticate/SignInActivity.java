@@ -26,6 +26,12 @@ import java.net.URL;
 import tcss450.uw.edu.team15project450.MainActivity;
 import tcss450.uw.edu.team15project450.R;
 
+/**
+ * This class is an Activity that allows a user to either login or register.
+ *
+ * @author Gabrielle Bly, Gabrielle Glynn
+ * @version May 4, 2016
+ */
 public class SignInActivity extends AppCompatActivity
         implements LoginFragment.LoginInteractionListener, RegisterFragment.RegisterUserListener {
 
@@ -47,7 +53,7 @@ public class SignInActivity extends AppCompatActivity
             finish();
         }
 
-        // if register button is clicked
+        // if register button is clicked, switch to the Register Fragment
         Button registerButton = (Button) findViewById(R.id.register_button);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +108,9 @@ public class SignInActivity extends AppCompatActivity
         mSharedPreferences.edit().putString("userid", mUserId).commit();
     }
 
+    /**
+     * This class allows us to call the service for logging in a user.
+     */
     private class LoginTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {

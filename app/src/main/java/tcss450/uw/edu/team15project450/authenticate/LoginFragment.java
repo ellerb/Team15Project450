@@ -17,7 +17,10 @@ import java.net.URLEncoder;
 import tcss450.uw.edu.team15project450.R;
 
 /**
- * A simple {@link Fragment} subclass.
+ * A Fragment that allows the user to login.
+ *
+ * @author Gabrielle Bly, Gabrielle Glynn
+ * @version May 4, 2016
  */
 public class LoginFragment extends Fragment {
 
@@ -29,6 +32,9 @@ public class LoginFragment extends Fragment {
     private EditText mUserIdText;
     private EditText mPwdText;
 
+    /**
+     * The interface to be implemented by activities containing this fragment,
+     */
     public interface LoginInteractionListener {
         void login(String url, String userId, String pwd);
     }

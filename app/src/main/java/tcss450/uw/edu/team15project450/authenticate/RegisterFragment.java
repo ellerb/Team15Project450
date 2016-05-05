@@ -17,7 +17,10 @@ import java.net.URLEncoder;
 import tcss450.uw.edu.team15project450.R;
 
 /**
- * A simple {@link Fragment} subclass.
+ * A Fragment that allows the user to register.
+ *
+ * @author Gabrielle Bly, Gabrielle Glynn
+ * @version May 4, 2016
  */
 public class RegisterFragment extends Fragment {
 
@@ -33,6 +36,9 @@ public class RegisterFragment extends Fragment {
         // Required empty public constructor
     }
 
+    /**
+     * The interface to be implemented by activities containing this fragment,
+     */
     public interface RegisterUserListener {
         void registerUser(String url);
     }
@@ -96,8 +102,14 @@ public class RegisterFragment extends Fragment {
         }
     }
 
+    /**
+     * This method will build the url for calling the AsyncTask.
+     *
+     * @param view
+     * @return A string that represents the url
+     */
     // method that will build the url for calling the AsyncTask.
-    private String buildRegisterURL(View v) {
+    private String buildRegisterURL(View view) {
 
         StringBuilder sb = new StringBuilder(REGISTER_USER_URL);
 
@@ -118,7 +130,7 @@ public class RegisterFragment extends Fragment {
             Log.i("RegisterFragment", sb.toString());
 
         } catch (Exception e) {
-            Toast.makeText(v.getContext(), "Something wrong with the url" + e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(view.getContext(), "Something wrong with the url" + e.getMessage(), Toast.LENGTH_LONG).show();
         }
         return sb.toString();
     }
