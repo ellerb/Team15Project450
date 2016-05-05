@@ -31,8 +31,7 @@ public class CreateTourActivity extends AppCompatActivity
 
     private SharedPreferences mSharedPreference;
     private String mUserID;
-    private boolean mCreateBasicTourSuccess;
-    private boolean mAddPlaceSuccess;
+    private String mTourTitle;
 
     /**
      *
@@ -41,9 +40,6 @@ public class CreateTourActivity extends AppCompatActivity
      @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mCreateBasicTourSuccess = false;
-        mAddPlaceSuccess = false;
 
         setContentView(R.layout.activity_create_tour);
 
@@ -56,7 +52,7 @@ public class CreateTourActivity extends AppCompatActivity
             CreateTourFragment createTourFragment = new CreateTourFragment();
             createTourFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, createTourFragment)
+                    .replace(R.id.fragment_container, createTourFragment)
                     .commit();
         }
     }
@@ -117,42 +113,37 @@ public class CreateTourActivity extends AppCompatActivity
         CreateTourTask task = new CreateTourTask();
         task.execute(new String[]{url.toString()});
 
-        if (mCreateBasicTourSuccess) {
-            if (hasAudio) {
-                if (findViewById(R.id.fragment_container) != null) {
-                    AddAudioFragment addAudioFragment = new AddAudioFragment();
-                    FragmentTransaction transaction = getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.fragment_container, addAudioFragment)
-                            .addToBackStack(null);
-                    transaction.commit();
-                }
-            } else if (hasImage) {
-                if (findViewById(R.id.fragment_container) != null) {
-                    AddImageFragment addImageFragment = new AddImageFragment();
-                    FragmentTransaction transaction = getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.fragment_container, addImageFragment)
-                            .addToBackStack(null);
-                    transaction.commit();
-                }
-            } else {
-                if (findViewById(R.id.fragment_container) != null) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("userid", mUserID);
-                    AddPlaceFragment addPlaceFragment = new AddPlaceFragment();
-                    addPlaceFragment.setArguments(bundle);
-                    getSupportFragmentManager().beginTransaction()
-                            .add(R.id.fragment_container, addPlaceFragment)
-                            .commit();
-                }
+        if (hasAudio) {
+            if (findViewById(R.id.fragment_container) != null) {
+                AddAudioFragment addAudioFragment = new AddAudioFragment();
+                FragmentTransaction transaction = getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, addAudioFragment)
+                        .addToBackStack(null);
+                transaction.commit();
+            }
+        } else if (hasImage) {
+            if (findViewById(R.id.fragment_container) != null) {
+                AddImageFragment addImageFragment = new AddImageFragment();
+                FragmentTransaction transaction = getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, addImageFragment)
+                        .addToBackStack(null);
+                transaction.commit();
             }
         } else {
-            Toast.makeText(getApplicationContext(), "Unable to add tour. Try again.",
-                    Toast.LENGTH_LONG).show();
-            Intent viewCreatedIntent = new Intent(this, MainActivity.class);
-            startActivity(viewCreatedIntent);
+            if (findViewById(R.id.fragment_container) != null) {
+                Bundle bundle = new Bundle();
+                bundle.putString("userid", mUserID);
+                bundle.putString("tourTitle", mTourTitle);
+                AddPlaceFragment addPlaceFragment = new AddPlaceFragment();
+                addPlaceFragment.setArguments(bundle);
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, addPlaceFragment)
+                        .commit();
+            }
         }
+
     }
 
     /**
@@ -177,15 +168,14 @@ public class CreateTourActivity extends AppCompatActivity
             }
         } else {
             if (findViewById(R.id.fragment_container) != null) {
-                // if tour added was a success
                 Bundle bundle = new Bundle();
                 bundle.putString("userid", mUserID);
+                bundle.putString("tourTitle", mTourTitle);
                 AddPlaceFragment addPlaceFragment = new AddPlaceFragment();
                 addPlaceFragment.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction()
-                        .add(R.id.fragment_container, addPlaceFragment)
+                        .replace(R.id.fragment_container, addPlaceFragment)
                         .commit();
-                // else retry or go back to main menu
             }
         }
     }
@@ -200,15 +190,16 @@ public class CreateTourActivity extends AppCompatActivity
         CreateTourTask task = new CreateTourTask();
         task.execute(new String[]{url.toString()});
 
-        if (findViewById(R.id.fragment_container) != null) {
-            Bundle bundle = new Bundle();
-            bundle.putString("userid", mUserID);
-            AddPlaceFragment addPlaceFragment = new AddPlaceFragment();
-            addPlaceFragment.setArguments(bundle);
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, addPlaceFragment)
-                    .commit();
-        }
+         if (findViewById(R.id.fragment_container) != null) {
+             Bundle bundle = new Bundle();
+             bundle.putString("userid", mUserID);
+             bundle.putString("tourTitle", mTourTitle);
+             AddPlaceFragment addPlaceFragment = new AddPlaceFragment();
+             addPlaceFragment.setArguments(bundle);
+             getSupportFragmentManager().beginTransaction()
+                     .replace(R.id.fragment_container, addPlaceFragment)
+                     .commit();
+         }
     }
 
     /**
@@ -220,29 +211,12 @@ public class CreateTourActivity extends AppCompatActivity
      @Override
     public void addPlace(String url, boolean hasAudio, boolean hasImage) {
 
-        CreateTourTask task = new CreateTourTask();
-        task.execute(new String[]{url.toString()});
+         CreateTourTask task = new CreateTourTask();
+         task.execute(new String[]{url.toString()});
 
-        // Add a dialog box asking if user would like to add another place on success
-        if (mCreateBasicTourSuccess) {
-            mCreateBasicTourSuccess = false;
-            Intent viewCreatedIntent = new Intent(this, MainActivity.class);
-            startActivity(viewCreatedIntent);
-        }
-        else {
-            Toast.makeText(getApplicationContext(), "Unable to add place. Try again.",
-                    Toast.LENGTH_LONG).show();
-
-            if (findViewById(R.id.fragment_container) != null) {
-                AddPlaceFragment addPlaceFragment = new AddPlaceFragment();
-                FragmentTransaction transaction = getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container, addPlaceFragment)
-                        .addToBackStack(null);
-                transaction.commit();
-            }
-        }
-    }
+         Intent viewCreatedIntent = new Intent(this, ViewCreatedToursActivity.class);
+         startActivity(viewCreatedIntent);
+     }
 
     /**
      *
@@ -272,8 +246,6 @@ public class CreateTourActivity extends AppCompatActivity
                     }
 
                 } catch (Exception e) {
-                    mCreateBasicTourSuccess = false;
-                    mAddPlaceSuccess = false;
                     response = "Unable to create, Reason: "
                             + e.getMessage();
                 } finally {
@@ -298,14 +270,16 @@ public class CreateTourActivity extends AppCompatActivity
             try {
                 JSONObject jsonObject = new JSONObject(result);
                 String status = (String) jsonObject.get("result");
+                String type = (String) jsonObject.get("type");
+
+                if(status.equals("success") && type.equals("createBasicTour")) {
+                    mTourTitle = (String) jsonObject.get("tourTitle");
+                }
                 if (status.equals("success")) {
-                    String type = (String) jsonObject.get("type");
                     String toastText;
-                    if(type == "createBasicTour") {
-                        mCreateBasicTourSuccess = true;
+                    if(type.equals("createBasicTour")) {
                         toastText = "Basic tour successfully added!";
-                    } else if (type == "addPlace") {
-                        mAddPlaceSuccess = true;
+                    } else if (type.equals("addPlace")) {
                         toastText = "Place successfully added!";
                     } else {
                         toastText = "Successfully added!";
@@ -314,16 +288,12 @@ public class CreateTourActivity extends AppCompatActivity
                             , Toast.LENGTH_LONG)
                             .show();
                 } else {
-                    mCreateBasicTourSuccess = false;
-                    mAddPlaceSuccess = false;
                     Toast.makeText(getApplicationContext(), "Failed to add: "
                                     + jsonObject.get("error")
                             , Toast.LENGTH_LONG)
                             .show();
                 }
             } catch (JSONException e) {
-                mCreateBasicTourSuccess = false;
-                mAddPlaceSuccess = false;
                 Toast.makeText(getApplicationContext(), "Something wrong with the data " +
                         e.getMessage(), Toast.LENGTH_LONG).show();
             }
