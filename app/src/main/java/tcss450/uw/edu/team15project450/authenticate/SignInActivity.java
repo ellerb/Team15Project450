@@ -46,7 +46,7 @@ public class SignInActivity extends AppCompatActivity
 
         mSharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS), Context.MODE_PRIVATE);
         if (!mSharedPreferences.getBoolean(getString(R.string.LOGGEDIN), false)) {
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new LoginFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new LoginFragment()).commit();
         } else {
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
@@ -249,5 +249,4 @@ public class SignInActivity extends AppCompatActivity
             }
         }
     }
-
 }
