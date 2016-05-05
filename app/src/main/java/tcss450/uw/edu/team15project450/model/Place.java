@@ -3,7 +3,7 @@ package tcss450.uw.edu.team15project450.model;
 import java.io.Serializable;
 
 /**
- * This model class will be used to create a Tour object. Audio and image not
+ * This model class will be used to create a Place object. Audio and image not
  * yet implemented.
  *
  * Created by Gabe on 4/28/2016.
