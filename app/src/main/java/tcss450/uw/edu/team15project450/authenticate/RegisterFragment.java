@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.net.URLEncoder;
@@ -48,7 +49,7 @@ public class RegisterFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_register, container, false);
 
-        Button activityRegButton = (Button) getActivity().findViewById(R.id.register_button);
+        TextView activityRegButton = (TextView) getActivity().findViewById(R.id.register_txtview);
         activityRegButton.setVisibility(View.GONE);
 
         mUserIdText = (EditText) v.findViewById(R.id.reg_username);

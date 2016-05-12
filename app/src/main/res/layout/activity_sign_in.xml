@@ -10,12 +10,13 @@
     android:id="@+id/fragment_container"
     tools:context="tcss450.uw.edu.team15project450.authenticate.SignInActivity">
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/register_btn"
+        android:text="@string/register_txtv"
         android:onClick="register"
-        android:id="@+id/register_button" />
+        android:textSize="18dp"
+        android:id="@+id/register_txtview" />
 
 </FrameLayout>

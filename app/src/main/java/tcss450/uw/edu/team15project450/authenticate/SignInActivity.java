@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -54,8 +55,8 @@ public class SignInActivity extends AppCompatActivity
         }
 
         // if register button is clicked, switch to the Register Fragment
-        Button registerButton = (Button) findViewById(R.id.register_button);
-        registerButton.setOnClickListener(new View.OnClickListener() {
+        TextView registerTxtv = (TextView) findViewById(R.id.register_txtview);
+        registerTxtv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 RegisterFragment registerFragment = new RegisterFragment();

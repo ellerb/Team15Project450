@@ -21,6 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/reg_pwd_hint"
+        android:inputType="textPassword"
+        android:fontFamily="sans-serif"
         android:id="@+id/reg_pwd" />
 
     <Button

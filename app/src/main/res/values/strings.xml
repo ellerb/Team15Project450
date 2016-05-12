@@ -48,7 +48,7 @@
     <string name="LOGIN_PREFS">tcss450.uw.edu.team15project450.PREFS</string>
     <string name="LOGGEDIN">loggedin</string>
     <string name="LOGIN_FILE">tcss450.uw.edu.team15project450.LOGIN_FILE</string>
-    <string name="register_btn">Register</string>
+    <string name="register_txtv">Create an account</string>
 
     <!--For the Register-->
     <string name="reg_username_hint">Enter username</string>
