@@ -1,0 +1,96 @@
+mysql -u_450atm15 -pliOdnef2
+
+create table Tour (
+	title VARCHAR(50) NOT NULL,
+	createdBy VARCHAR(25) NOT NULL,
+	PRIMARY KEY (title, createdBy),
+	description TEXT NOT NULL,
+	image BLOB DEFAULT NULL,
+	audio BLOB DEFAULT NULL,
+	bPublic TINYINT NOT NULL,
+	bPublished TINYINT NOT NULL,
+	dateCreated TIMESTAMP DEFAULT 0,
+    dateModified TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+ALTER TABLE Tour
+   ADD FOREIGN KEY (createdBy) REFERENCES User (userid);
+
+DROP TABLE table_name
+
+create table Place (
+	placeID INT AUTO_INCREMENT PRIMARY KEY,
+	tourTitle VARCHAR(50) NOT NULL,
+	tourCreatedBy VARCHAR(25) NOT NULL,
+	title VARCHAR(50) NOT NULL,
+	description TEXT DEFAULT NULL,
+	instruction TEXT DEFAULT NULL,
+	latitude VARCHAR(25) NOT NULL,
+	longitude VARCHAR(25) NOT NULL,
+	image BLOB DEFAULT NULL,
+	audio BLOB DEFAULT NULL,
+	dateCreated TIMESTAMP DEFAULT 0,
+    dateModified TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+ALTER TABLE Place
+   ADD FOREIGN KEY (tourTitle) REFERENCES Tour (title);
+
+ALTER TABLE Place
+   ADD FOREIGN KEY (tourCreatedBy) REFERENCES Tour (createdBy);
+
+ALTER TABLE Place
+   ADD FOREIGN KEY (tourCreatedBy) REFERENCES User (userid);
+
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////
+NOT USED:
+//////////////////////////////////////////////////////////////
+
+
+   // USE EVENTUALLY
+create table Tour (
+	tourID INT AUTO_INCREMENT PRIMARY KEY,
+	title VARCHAR(50) NOT NULL,
+	description TEXT NOT NULL,
+	image BLOB DEFAULT NULL,
+	audio BLOB DEFAULT NULL,
+	bPublic TINYINT NOT NULL,
+	bPublished TINYINT NOT NULL,
+	createdBy VARCHAR(25) NOT NULL,
+	dateCreated TIMESTAMP DEFAULT 0,
+    dateModified TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+ALTER TABLE Tour
+   ADD FOREIGN KEY (createdBy) REFERENCES User (userid);
+
+DROP TABLE table_name
+
+create table Place (
+	placeID INT AUTO_INCREMENT PRIMARY KEY,
+	title VARCHAR(50) NOT NULL,
+	description TEXT DEFAULT NULL,
+	instruction TEXT DEFAULT NULL,
+	latitude VARCHAR(25) NOT NULL,
+	longitude VARCHAR(25) NOT NULL,
+	image BLOB DEFAULT NULL,
+	audio BLOB DEFAULT NULL,
+	inTourID INT NOT NULL,
+	dateCreated TIMESTAMP DEFAULT 0,
+    dateModified TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+ALTER TABLE Place
+   ADD FOREIGN KEY (inTourID) REFERENCES Tour (tourID);
