@@ -123,7 +123,7 @@ public class Tour implements Serializable {
 
     /**
      * Parses the json string, returns an error message if unsuccessful.
-     * Returns course list if success.
+     * Returns tour list if success.
      * @param tourJSON
      * @param tourList
      * @return reason or null if successful.

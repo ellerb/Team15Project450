@@ -131,7 +131,7 @@ public class Place implements Serializable {
 
     /**
      * Parses the json string, returns an error message if unsuccessful.
-     * Returns course list if success.
+     * Returns place array list if success.
      * @param placeJSON
      * @param placeList
      * @return reason or null if successful.
