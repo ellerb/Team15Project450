@@ -165,7 +165,7 @@ public class CreateTourFragment extends Fragment {
 
             String tourTitle = mTitle.getText().toString();
             sb.append("title=");
-            sb.append(tourTitle);
+            sb.append(URLEncoder.encode(tourTitle, "UTF-8"));
 
             String tourDesc = mDescription.getText().toString();
             sb.append("&desc=");
