@@ -22,10 +22,10 @@
             android:label="Create a Tour">
         </activity>
         <activity
-            android:name=".ViewCreatedToursActivity"
+            android:name=".browse.ViewCreatedToursActivity"
             android:label="View Created Tours" />
         <activity
-            android:name=".BrowseToursActivity"
+            android:name=".browse.BrowseToursActivity"
             android:label="Browse Tours"></activity>
         <activity
             android:name=".authenticate.SignInActivity">

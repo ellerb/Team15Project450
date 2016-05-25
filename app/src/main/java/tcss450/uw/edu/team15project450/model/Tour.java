@@ -26,10 +26,10 @@ public class Tour implements Serializable {
     private String mDateCreated;
     private String mDateModified;
 
-    public static final String TITLE = "title"
-            , DESC = "desc", IS_PUBLIC = "isPublic"
-            , IS_PUBLISH = "isPublish", CREATED_BY = "userid"
-            , DATE_CREATED = "dateCreated", DATE_MOD = "dateMod";
+    public static final String TITLE = "title",
+            DESC = "description", IS_PUBLIC = "bPublic",
+            IS_PUBLISH = "bPublished", CREATED_BY = "createdBy",
+            DATE_CREATED = "dateCreated", DATE_MOD = "dateModified";
 
     public Tour(String title, String description
             , ArrayList<Place> placeList, boolean isPublic
@@ -136,10 +136,11 @@ public class Tour implements Serializable {
 
                 for (int i = 0; i < arr.length(); i++) {
                     JSONObject obj = arr.getJSONObject(i);
-                    Tour tour = new Tour(obj.getString(Tour.TITLE), obj.getString(Tour.DESC)
-                            , new ArrayList<Place>(), obj.getBoolean(Tour.IS_PUBLIC)
-                            , obj.getBoolean(Tour.IS_PUBLISH), obj.getString(Tour.CREATED_BY)
-                            , obj.getString(Tour.DATE_CREATED), obj.getString(Tour.DATE_MOD));
+                    boolean isPublic = (1 == obj.getInt(IS_PUBLIC));
+                    boolean isPublish = (1 == obj.getInt(IS_PUBLISH));
+                    Tour tour = new Tour(obj.getString(Tour.TITLE), obj.getString(Tour.DESC),
+                            new ArrayList<Place>(), isPublic, isPublish, obj.getString(Tour.CREATED_BY),
+                            obj.getString(Tour.DATE_CREATED), obj.getString(Tour.DATE_MOD));
                     tourList.add(tour);
                 }
             } catch (JSONException e) {

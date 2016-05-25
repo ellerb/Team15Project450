@@ -1,4 +1,4 @@
-package tcss450.uw.edu.team15project450;
+package tcss450.uw.edu.team15project450.browse;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,21 +8,22 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import tcss450.uw.edu.team15project450.R;
 import tcss450.uw.edu.team15project450.authenticate.SignInActivity;
 
 /**
  * This activity is currently a shell to be implemented later. Will allow
- * a user to browse and select available tours to download and take.
+ * a user to see all the tours they have created and select them to edit.
  *
  * @author Gabrielle Bly, Gabrielle Glynn
  * @version May 4, 2016
  */
-public class BrowseToursActivity extends AppCompatActivity {
+public class ViewCreatedToursActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_browse_tours);
+        setContentView(R.layout.activity_view_created_tours);
     }
 
     @Override

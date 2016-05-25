@@ -1,4 +1,4 @@
-package tcss450.uw.edu.team15project450;
+package tcss450.uw.edu.team15project450.browse;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,22 +8,35 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import tcss450.uw.edu.team15project450.R;
 import tcss450.uw.edu.team15project450.authenticate.SignInActivity;
+import tcss450.uw.edu.team15project450.model.Tour;
 
 /**
  * This activity is currently a shell to be implemented later. Will allow
- * a user to see all the tours they have created and select them to edit.
+ * a user to browse and select available tours to download and take.
  *
  * @author Gabrielle Bly, Gabrielle Glynn
  * @version May 4, 2016
  */
-public class ViewCreatedToursActivity extends AppCompatActivity {
+public class BrowseToursActivity extends AppCompatActivity implements TourListFragment.OnListFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_created_tours);
+        setContentView(R.layout.activity_browse_tours);
+
+        if (savedInstanceState == null || getSupportFragmentManager().findFragmentById(R.id.list) == null) {
+            TourListFragment tourListFragment = new TourListFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.browse_tours_container, tourListFragment)
+                    .commit();
+        }
     }
+
+    @Override
+    public void onListFragmentInteraction(Tour item) { }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
