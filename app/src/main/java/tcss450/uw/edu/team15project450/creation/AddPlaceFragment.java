@@ -17,6 +17,8 @@ import java.net.URLEncoder;
 
 import tcss450.uw.edu.team15project450.R;
 
+//ADD DATA VALIDATION FOR LOCATION
+
 /**
  * A fragment that will allow a user to add a place to a tour that the user created.
  * Right now implementation only includes adding one place when CreateTourActivity
@@ -114,7 +116,7 @@ public class AddPlaceFragment extends Fragment {
                     return;
                 }
 
-                String url = buildCourseURL(view);
+                String url = buildPlaceURL(view);
                 boolean bHasAudio = checkIfAudio();
                 boolean bHasImage = checkIfImage();
                 mListener.addPlace(url, bHasAudio, bHasImage);
@@ -173,7 +175,7 @@ public class AddPlaceFragment extends Fragment {
      * @param view
      * @return
      */
-    private String buildCourseURL(View view) {
+    private String buildPlaceURL(View view) {
 
         StringBuilder sb = new StringBuilder(ADD_PLACE_URL);
 
