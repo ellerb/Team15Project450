@@ -30,8 +30,7 @@ import tcss450.uw.edu.team15project450.R;
 public class CreateTourFragment extends Fragment {
 
     private final static String CREATE_BASIC_TOUR_URL
-            = "http://cssgate.insttech.washington.edu/~glynng/Android/createBasicTour.php?";
-            //= "http://cssgate.insttech.washington.edu/~_450atm15/createBasicTour.php?";
+            = "http://cssgate.insttech.washington.edu/~_450atm15/createBasicTour.php?";
 
     private CreateBasicTourListener mListener;
     private EditText mTitle;
