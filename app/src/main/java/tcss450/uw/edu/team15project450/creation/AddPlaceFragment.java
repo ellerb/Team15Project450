@@ -17,7 +17,6 @@ import java.net.URLEncoder;
 
 import tcss450.uw.edu.team15project450.R;
 
-
 /**
  * A fragment that will allow a user to add a place to a tour that the user created.
  * Right now implementation only includes adding one place when CreateTourActivity
@@ -30,8 +29,7 @@ import tcss450.uw.edu.team15project450.R;
 public class AddPlaceFragment extends Fragment {
 
     private final static String ADD_PLACE_URL
-            = "http://cssgate.insttech.washington.edu/~glynng/Android/addPlace.php?";
-    //= "http://cssgate.insttech.washington.edu/~_450atm15/addPlace.php?";
+            = "http://cssgate.insttech.washington.edu/~_450atm15/addPlace.php?";
 
     private AddPlaceListener mListener;
     private EditText mTitle;
