@@ -72,35 +72,35 @@ public class CreateTourFragment extends Fragment {
         Button createBasicTourButton = (Button) view.findViewById(R.id.ButtonCreateTour);
         createBasicTourButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 String tTitle = mTitle.getText().toString();
                 String tDescription = mDescription.getText().toString();
                 if (TextUtils.isEmpty(tTitle)) {
-                    Toast.makeText(view.getContext(), "Enter title", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), "Enter title", Toast.LENGTH_SHORT).show();
                     mTitle.requestFocus();
                     return;
                 }
 
                 if (TextUtils.isEmpty(tDescription)) {
-                    Toast.makeText(view.getContext(), "Enter description", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), "Enter description", Toast.LENGTH_SHORT).show();
                     mDescription.requestFocus();
                     return;
 
                 }
                 if (tTitle.length() > 25) {
-                    Toast.makeText(view.getContext(), "Title must be under 25 characters", Toast.LENGTH_SHORT)
+                    Toast.makeText(v.getContext(), "Title must be under 25 characters", Toast.LENGTH_SHORT)
                             .show();
                     mDescription.requestFocus();
                     return;
                 }
                 if (tDescription.length() < 25) {
-                    Toast.makeText(view.getContext(), "Enter description of at least 25 characters", Toast.LENGTH_SHORT)
+                    Toast.makeText(v.getContext(), "Enter description of at least 25 characters", Toast.LENGTH_SHORT)
                             .show();
                     mDescription.requestFocus();
                     return;
                 }
 
-                String url = buildCourseURL(view);
+                String url = buildTourURL(v);
                 boolean bHasAudio = checkIfAudio();
                 boolean bHasImage = checkIfImage();
                 mListener.createBasicTour(url, bHasAudio, bHasImage, tTitle);
@@ -122,15 +122,10 @@ public class CreateTourFragment extends Fragment {
     }
 
     /**
-     * Included if statement setting boolean value to false is only
-     * for phase 1 in order to prevent the audio fragment from being called.
-     *
+     * Returns whether or not a user has selected the add audio to tour option.
      * @return
      */
     private boolean checkIfAudio() {
-        if (mHasAudio.isChecked()) {
-            mHasAudio.setChecked(false);
-        }
         return mHasAudio.isChecked();
     }
 
@@ -162,7 +157,7 @@ public class CreateTourFragment extends Fragment {
      * @param view
      * @return
      */
-    private String buildCourseURL(View view) {
+    private String buildTourURL(View view) {
 
         StringBuilder sb = new StringBuilder(CREATE_BASIC_TOUR_URL);
 
@@ -170,7 +165,7 @@ public class CreateTourFragment extends Fragment {
 
             String tourTitle = mTitle.getText().toString();
             sb.append("title=");
-            sb.append(tourTitle);
+            sb.append(URLEncoder.encode(tourTitle, "UTF-8"));
 
             String tourDesc = mDescription.getText().toString();
             sb.append("&desc=");
