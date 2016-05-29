@@ -33,7 +33,6 @@ public class TourListFragment extends Fragment {
 
     public static final String TOUR_URL =
             "http://cssgate.insttech.washington.edu/~_450atm15/tours.php";
-    //"http://cssgate.insttech.washington.edu/~_450atm15/test.php?cmd=courses";
     private RecyclerView mRecyclerView;
 
     private int mColumnCount = 1;
@@ -69,12 +68,13 @@ public class TourListFragment extends Fragment {
             }
         }
 
+
+
         DownloadToursTask task = new DownloadToursTask();
         task.execute(new String[]{TOUR_URL});
 
         return view;
     }
-
 
     @Override
     public void onAttach(Context context) {
@@ -160,7 +160,5 @@ public class TourListFragment extends Fragment {
                 mRecyclerView.setAdapter(new MyTourRecyclerViewAdapter(tourList, mListener));
             }
         }
-
-
     }
 }

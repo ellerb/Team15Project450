@@ -21,7 +21,6 @@ public class MyTourRecyclerViewAdapter extends RecyclerView.Adapter<MyTourRecycl
     private final List<Tour> mValues;
     private final TourListFragment.OnListFragmentInteractionListener mListener;
 
-
     public MyTourRecyclerViewAdapter(List<Tour> items, TourListFragment.OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;

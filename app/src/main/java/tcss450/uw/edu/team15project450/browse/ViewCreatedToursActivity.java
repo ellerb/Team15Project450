@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 import tcss450.uw.edu.team15project450.R;
 import tcss450.uw.edu.team15project450.authenticate.SignInActivity;
+import tcss450.uw.edu.team15project450.model.Tour;
 
 /**
  * This activity is currently a shell to be implemented later. Will allow
@@ -18,13 +19,23 @@ import tcss450.uw.edu.team15project450.authenticate.SignInActivity;
  * @author Gabrielle Bly, Gabrielle Glynn
  * @version May 4, 2016
  */
-public class ViewCreatedToursActivity extends AppCompatActivity {
+public class ViewCreatedToursActivity extends AppCompatActivity implements ViewCreatedTourListFragment.OnListFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_created_tours);
+
+        if (savedInstanceState == null || getSupportFragmentManager().findFragmentById(R.id.vc_list) == null) {
+            ViewCreatedTourListFragment vcTourListFragment = new ViewCreatedTourListFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.browse_vc_tours_container, vcTourListFragment)
+                    .commit();
+        }
     }
+
+    @Override
+    public void onListFragmentInteraction(Tour item) { }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
