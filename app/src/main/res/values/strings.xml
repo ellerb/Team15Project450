@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">WalkingTour</string>
+    <string name="base_server_url">http://cssgate.insttech.washington.edu/~_450atm15/</string>
     <string name="action_settings">Settings</string>
 
     <!--For the MainActivity-->
@@ -7,6 +8,8 @@
     <string name="button_text_create_a_tour">CREATE A TOUR</string>
     <string name="button_text_view_created_tours">VIEW TOURS CREATED BY YOU</string>
     <string name="button_text_browse_tours">FIND AVAILABLE TOURS</string>
+    <string name="button_text_view_tour">VIEW TOUR</string>
+    <string name="button_text_view_place">VIEW PLACE</string>
 
     <!--For the CreateTourActivity-->
 
@@ -28,14 +31,27 @@
     <string name="add_place_form_latitude_background_text">Latitude (Ex. 47.669874)</string>
     <string name="add_place_form_add_audio_description">Add audio track?</string>
     <string name="add_place_form_add_image">Add image?</string>
-    <string name="add_place_button">ADD PLACE</string>
+    <string name="add_place_button">Add Place</string>
+    <string name="add_location_button">Next: Choose Location</string>
 
     <!--For the AddAudioFragment-->
+    <string name="record_audio">Press Record to Begin</string>
+    <string name="record_button">Record</string>
+    <string name="rerecord_button">Rerecord</string>
+    <string name="stop_button">Stop</string>
+    <string name="add_audio_button">Add Audio</string>
     <string name="tour_title">PLACEHOLDER</string>
+    <string name="tour_description">PLACEHOLDER</string>
     <string name="place_title">PLACEHOLDER</string>
     <string name="place_description">PLACEHOLDER</string>
     <string name="place_location">PLACEHOLDER</string>
-    <string name="add_audio_button">ADD AUDIO</string>
+    <string name="recording_message">Recording...</string>
+    <string name="recording_toast">Start recording...</string>
+    <string name="stopped_message">Recording stopped...</string>
+    <string name="stopped_toast">Recording stopped...</string>
+
+    <!--For the AddAudioFragment-->
+    <string name="uploading_text">Uploading file to server...</string>
 
     <!--For the AddImageFragment-->
     <string name="add_image_button">ADD IMAGE</string>

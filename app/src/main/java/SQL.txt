@@ -5,13 +5,16 @@ create table Tour (
 	createdBy VARCHAR(25) NOT NULL,
 	PRIMARY KEY (title, createdBy),
 	description TEXT NOT NULL,
-	image BLOB DEFAULT NULL,
-	audio BLOB DEFAULT NULL,
+	image TEXT DEFAULT NULL,
+	audio TEXT DEFAULT NULL,
 	bPublic TINYINT NOT NULL,
 	bPublished TINYINT NOT NULL,
 	dateCreated TIMESTAMP DEFAULT 0,
     dateModified TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+
+ALTER TABLE mytable MODIFY mycolumn VARCHAR(255);
+ALTER TABLE mytable MODIFY mycolumn DOUBLE;
 
 ALTER TABLE Tour
    ADD FOREIGN KEY (createdBy) REFERENCES User (userid);

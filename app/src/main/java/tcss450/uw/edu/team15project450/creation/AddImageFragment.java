@@ -65,6 +65,6 @@ public class AddImageFragment extends Fragment {
      * activity.
      */
     public interface AddImageListener {
-        void addTourImage(String url);
+        void addImage(String url, String type, String outputFile);
     }
 }

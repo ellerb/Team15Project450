@@ -18,7 +18,7 @@
             android:id="@+id/CreatePlaceInstruction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/add_place_form_instructions"
+            android:text="@string/add_place_form_instructions"
             android:textSize="10pt">
         </TextView>
 
@@ -47,19 +47,21 @@
             android:lines="3">
         </EditText>
 
-        <EditText
-            android:id="@+id/AddPlaceLongitude"
-            android:layout_height="wrap_content"
-            android:layout_width="fill_parent"
-            android:hint="@string/add_place_form_longitude_background_text">
-        </EditText>
+        <!--<EditText-->
+            <!--android:id="@+id/AddPlaceLatitude"-->
+            <!--android:inputType="numberDecimal"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:hint="@string/add_place_form_latitude_background_text">-->
+        <!--</EditText>-->
 
-        <EditText
-            android:id="@+id/AddPlaceLatitude"
-            android:layout_height="wrap_content"
-            android:layout_width="fill_parent"
-            android:hint="@string/add_place_form_latitude_background_text">
-        </EditText>
+        <!--<EditText-->
+            <!--android:id="@+id/AddPlaceLongitude"-->
+            <!--android:inputType="numberDecimal"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:hint="@string/add_place_form_longitude_background_text">-->
+        <!--</EditText>-->
 
         <CheckBox
             android:id="@+id/AddAudioPlaceCheckBoxResponse"
@@ -72,14 +74,15 @@
             android:id="@+id/AddImagePlaceCheckBoxResponse"
             android:layout_height="wrap_content"
             android:layout_width="fill_parent"
-            android:text="@string/add_place_form_add_image">
+            android:text="@string/add_place_form_add_image"
+            android:enabled="false">
         </CheckBox>
 
         <Button
-            android:id="@+id/ButtonAddPlace"
+            android:id="@+id/ButtonAddLocation"
             android:layout_height="wrap_content"
             android:layout_width="fill_parent"
-            android:text="@string/add_place_button">
+            android:text="@string/add_location_button">
         </Button>
 
     </LinearLayout>
