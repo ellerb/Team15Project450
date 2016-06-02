@@ -28,11 +28,11 @@ public class Place implements Serializable {
     private String mDateCreated;
     private String mDateModified;
 
-    public static final String ID = "id"
-            , TITLE = "title", DESC = "desc", INSTRUCT = "instruct"
-            , LAT = "lat", LONG = "long", TOUR = "tour"
-            , CREATED_BY = "userid", DATE_CREATED = "dateCreated"
-            , DATE_MOD = "dateMod";
+    public static final String ID = "placeID",
+            TITLE = "title", DESC = "description", INSTRUCT = "instruction",
+            LAT = "latitude", LONG = "longitude", TOUR = "tourTitle",
+            CREATED_BY = "tourCreatedBy", DATE_CREATED = "dateCreated",
+            DATE_MOD = "dateModified";
 
     public Place(int id, String title, String description
             , String instruction, double latitude, double longitude
@@ -144,11 +144,11 @@ public class Place implements Serializable {
 
             for (int i = 0; i < arr.length(); i++) {
                 JSONObject obj = arr.getJSONObject(i);
-                Place place = new Place(obj.getInt(Place.ID), obj.getString(Place.TITLE)
-                        , obj.getString(Place.DESC), obj.getString(Place.INSTRUCT)
-                        , obj.getDouble(Place.LAT), obj.getDouble(Place.LONG)
-                        , obj.getString(Place.TOUR), obj.getString(Place.CREATED_BY)
-                        , obj.getString(Place.DATE_CREATED), obj.getString(Place.DATE_MOD));
+                Place place = new Place(obj.getInt(Place.ID), obj.getString(Place.TITLE),
+                        obj.getString(Place.DESC), obj.getString(Place.INSTRUCT),
+                        obj.getDouble(Place.LAT), obj.getDouble(Place.LONG),
+                        obj.getString(Place.TOUR), obj.getString(Place.CREATED_BY),
+                        obj.getString(Place.DATE_CREATED), obj.getString(Place.DATE_MOD));
                 placeList.add(place);
             }
         } catch (JSONException e) {

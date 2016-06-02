@@ -7,9 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import tcss450.uw.edu.team15project450.R;
 import tcss450.uw.edu.team15project450.authenticate.SignInActivity;
+import tcss450.uw.edu.team15project450.model.Place;
 import tcss450.uw.edu.team15project450.model.Tour;
 
 /**
@@ -19,7 +21,8 @@ import tcss450.uw.edu.team15project450.model.Tour;
  * @author Gabrielle Bly, Gabrielle Glynn
  * @version May 4, 2016
  */
-public class BrowseToursActivity extends AppCompatActivity implements TourListFragment.OnListFragmentInteractionListener {
+public class BrowseToursActivity extends AppCompatActivity implements TourListFragment.OnListFragmentInteractionListener,
+    PlaceFragment.OnPlaceListFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +38,32 @@ public class BrowseToursActivity extends AppCompatActivity implements TourListFr
     }
 
     @Override
-    public void onListFragmentInteraction(Tour item) { }
+    public void onListFragmentInteraction(Tour item) {
+        PlaceFragment placeFragment = new PlaceFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(PlaceFragment.TOUR_ITEM_SELECTED, item);
+        placeFragment.setArguments(args);
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.browse_tours_container, placeFragment)
+                .addToBackStack(null)
+                .commit();
+
+    }
+
+    //@Override
+    public void onPlaceListFragmentInteraction(Place item) {
+        PlaceDetailFragment placeDetailFragment = new PlaceDetailFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(PlaceDetailFragment.PLACE_ITEM_SELECTED, item);
+        placeDetailFragment.setArguments(args);
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.browse_tours_container, placeDetailFragment) //fragment_container?
+                .addToBackStack(null)
+                .commit();
+
+    }
 
 
     @Override

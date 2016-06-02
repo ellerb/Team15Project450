@@ -69,6 +69,10 @@ public class Tour implements Serializable {
         mPlaceList = tourPlaceList;
     }
 
+    public void addPlace(Place place) {
+        mPlaceList.add(place);
+    }
+
     public boolean getIsPublic() { return mIsPublic; }
 
     public void setIsPublic(boolean isPublic) { mIsPublic = isPublic; }
