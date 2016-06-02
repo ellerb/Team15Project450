@@ -80,6 +80,7 @@ public class VCPlaceFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getActivity().getApplicationContext(), AddPlaceActivity.class);
+                //bundle.putString
                 i.putExtras(bundle);
                 startActivity(i);
                 getActivity().finish();
