@@ -12,7 +12,7 @@ import android.view.MenuItem;
 
 import tcss450.uw.edu.team15project450.authenticate.SignInActivity;
 import tcss450.uw.edu.team15project450.browse.BrowseToursActivity;
-import tcss450.uw.edu.team15project450.browse.ViewCreatedToursActivity;
+import tcss450.uw.edu.team15project450.browse.userTour.ViewCreatedToursActivity;
 import tcss450.uw.edu.team15project450.creation.CreateTourActivity;
 
 /**

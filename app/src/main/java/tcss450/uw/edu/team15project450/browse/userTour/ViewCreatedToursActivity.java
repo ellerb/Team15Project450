@@ -1,4 +1,4 @@
-package tcss450.uw.edu.team15project450.browse;
+package tcss450.uw.edu.team15project450.browse.userTour;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 import tcss450.uw.edu.team15project450.R;
 import tcss450.uw.edu.team15project450.authenticate.SignInActivity;
+import tcss450.uw.edu.team15project450.model.Place;
 import tcss450.uw.edu.team15project450.model.Tour;
 
 /**
@@ -19,7 +20,9 @@ import tcss450.uw.edu.team15project450.model.Tour;
  * @author Gabrielle Bly, Gabrielle Glynn
  * @version May 4, 2016
  */
-public class ViewCreatedToursActivity extends AppCompatActivity implements ViewCreatedTourListFragment.OnListFragmentInteractionListener {
+public class ViewCreatedToursActivity extends AppCompatActivity implements
+        ViewCreatedTourListFragment.OnListFragmentInteractionListener,
+        VCPlaceFragment.OnPlaceListFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +38,30 @@ public class ViewCreatedToursActivity extends AppCompatActivity implements ViewC
     }
 
     @Override
-    public void onListFragmentInteraction(Tour item) { }
+    public void onListFragmentInteraction(Tour item) {
+        VCPlaceFragment placeFragment = new VCPlaceFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(VCPlaceFragment.TOUR_ITEM_SELECTED, item);
+        placeFragment.setArguments(args);
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.browse_vc_tours_container, placeFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
+    public void onPlaceListFragmentInteraction(Place item) {
+        VCPlaceDetailFragment placeDetailFragment = new VCPlaceDetailFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(VCPlaceDetailFragment.PLACE_ITEM_SELECTED, item);
+        placeDetailFragment.setArguments(args);
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.browse_vc_tours_container, placeDetailFragment)
+                .addToBackStack(null)
+                .commit();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

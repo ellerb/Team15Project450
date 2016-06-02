@@ -1,4 +1,4 @@
-package tcss450.uw.edu.team15project450.browse;
+package tcss450.uw.edu.team15project450.browse.userTour;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,14 +7,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import tcss450.uw.edu.team15project450.R;
-import tcss450.uw.edu.team15project450.browse.ViewCreatedTourListFragment.OnListFragmentInteractionListener;
 import tcss450.uw.edu.team15project450.model.Tour;
 
 import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Tour} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
+ * specified {@link ViewCreatedTourListFragment.OnListFragmentInteractionListener}.
  */
 public class MyVCTourRecyclerViewAdapter extends RecyclerView.Adapter<MyVCTourRecyclerViewAdapter.ViewHolder> {
 

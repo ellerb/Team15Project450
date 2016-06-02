@@ -22,7 +22,7 @@
             android:label="Create a Tour">
         </activity>
         <activity
-            android:name=".browse.ViewCreatedToursActivity"
+            android:name=".browse.userTour.ViewCreatedToursActivity"
             android:label="View Created Tours" />
         <activity
             android:name=".browse.BrowseToursActivity"
