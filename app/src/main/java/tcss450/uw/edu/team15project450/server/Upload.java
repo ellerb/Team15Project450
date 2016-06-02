@@ -37,6 +37,8 @@ public class Upload implements Runnable{
             if (mType.equals(PLACE)) {
                 mPlace = place;
             }
+            Log.d(TAG, "Type: " + mType);
+            Log.d(TAG, "Place: " + mPlace);
             connectURL = new URL(buildUploadURL());
         }catch(Exception ex){
             Log.e(TAG,"URL Malformatted");

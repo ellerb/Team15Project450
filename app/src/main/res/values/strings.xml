@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WalkingTour</string>
+    <string name="app_name">StoryTour</string>
     <string name="base_server_url">http://cssgate.insttech.washington.edu/~_450atm15/</string>
     <string name="action_settings">Settings</string>
 
