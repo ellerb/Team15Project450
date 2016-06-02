@@ -17,7 +17,7 @@ import java.util.List;
 public class Tour implements Serializable {
     private String mTitle;
     private String mDescription;
-    //private Audio mTourAudioDescription;
+    private String mAudioFilePath;
     //private Image mTourImage;
     private ArrayList<Place> mPlaceList;
     private boolean mIsPublic;
@@ -27,16 +27,17 @@ public class Tour implements Serializable {
     private String mDateModified;
 
     public static final String TITLE = "title",
-            DESC = "description", IS_PUBLIC = "bPublic",
+            DESC = "description", AUDIO = "audio", IS_PUBLIC = "bPublic",
             IS_PUBLISH = "bPublished", CREATED_BY = "createdBy",
             DATE_CREATED = "dateCreated", DATE_MOD = "dateModified";
 
-    public Tour(String title, String description
+    public Tour(String title, String description, String audioFilePath
             , ArrayList<Place> placeList, boolean isPublic
             , boolean isPublished, String createdBy
             , String dateCreated, String dateModified) {
         setTitle(title);
         setDescription(description);
+        mAudioFilePath = audioFilePath;
         mPlaceList = placeList;
         mIsPublic = isPublic;
         mIsPublished = isPublished;
@@ -61,6 +62,12 @@ public class Tour implements Serializable {
         if (description.length() < 25 )
             throw new IllegalArgumentException("Tour description must be at least 25 characters long.");
         mDescription = description;
+    }
+
+    public String getAudioFilePath() { return mAudioFilePath; }
+
+    public void setAudioFilePath(String audioFilePath) {
+        mAudioFilePath = audioFilePath;
     }
 
     public ArrayList<Place> getPlaceList() { return mPlaceList; }
@@ -120,9 +127,9 @@ public class Tour implements Serializable {
             isPublished = "No";
         }
         return "Title: " + mTitle + " Description: " + mDescription
-                + " Public: " + isPublic + " Published: " + isPublished
-                + " Created By: " + mCreatedBy + " Date Created: " + mDateCreated
-                + " Date Modified: " + mDateModified;
+                + "Audio file path: " + mAudioFilePath + " Public: " + isPublic
+                + " Published: " + isPublished + " Created By: " + mCreatedBy
+                + " Date Created: " + mDateCreated + " Date Modified: " + mDateModified;
     }
 
     /**
@@ -143,8 +150,9 @@ public class Tour implements Serializable {
                     boolean isPublic = (1 == obj.getInt(IS_PUBLIC));
                     boolean isPublish = (1 == obj.getInt(IS_PUBLISH));
                     Tour tour = new Tour(obj.getString(Tour.TITLE), obj.getString(Tour.DESC),
-                            new ArrayList<Place>(), isPublic, isPublish, obj.getString(Tour.CREATED_BY),
-                            obj.getString(Tour.DATE_CREATED), obj.getString(Tour.DATE_MOD));
+                            obj.getString(Tour.AUDIO), new ArrayList<Place>(), isPublic, isPublish,
+                            obj.getString(Tour.CREATED_BY), obj.getString(Tour.DATE_CREATED),
+                            obj.getString(Tour.DATE_MOD));
                     tourList.add(tour);
                 }
             } catch (JSONException e) {

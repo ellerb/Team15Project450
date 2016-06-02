@@ -21,7 +21,7 @@ public class Place implements Serializable {
     private String mInstruction;
     private double mLatitude;
     private double mLongitude;
-    //private Audio mAudio;
+    private String mAudioFilePath;
     //private Image mImage;
     private String mTourTitle;
     private String mTourCreatedBy;
@@ -30,13 +30,13 @@ public class Place implements Serializable {
 
     public static final String ID = "placeID",
             TITLE = "title", DESC = "description", INSTRUCT = "instruction",
-            LAT = "latitude", LONG = "longitude", TOUR = "tourTitle",
+            LAT = "latitude", LONG = "longitude", AUDIO = "audio", TOUR = "tourTitle",
             CREATED_BY = "tourCreatedBy", DATE_CREATED = "dateCreated",
             DATE_MOD = "dateModified";
 
     public Place(int id, String title, String description
             , String instruction, double latitude, double longitude
-            , String tourTitle, String tourCreatedBy
+            , String audioFilePath, String tourTitle, String tourCreatedBy
             , String dateCreated, String dateModified) {
         mPlaceID = id;
         setTitle(title);
@@ -44,6 +44,7 @@ public class Place implements Serializable {
         mInstruction = instruction;
         setLatitude(latitude);
         setLongitude(longitude);
+        mAudioFilePath = audioFilePath;
         setTourTitle(tourTitle);
         setTourCreatedBy(tourCreatedBy);
         setDateCreated(dateCreated);
@@ -88,6 +89,12 @@ public class Place implements Serializable {
         mLongitude = longitude;
     }
 
+    public String getAudioFilePath() { return mAudioFilePath; }
+
+    public void setAudioFilePath(String audioFilePath) {
+        mAudioFilePath = audioFilePath;
+    }
+
     public String getTourTitle() { return mTourTitle; }
 
     public void setTourTitle(String tourTitle) {
@@ -124,9 +131,9 @@ public class Place implements Serializable {
     public String toString() {
         return "Title: " + mTitle + " Description: " + mDescription
                 + " Instruction: " + mInstruction + " Latitude: " + mLatitude
-                + " Longitude: " + mLongitude + " Tour: " + mTourTitle
-                + " Created By: " + mTourCreatedBy + " Date Created: " + mDateCreated
-                + " Date Modified: " + mDateModified;
+                + " Longitude: " + mLongitude + "Audio file path: " + mAudioFilePath
+                + " Tour: " + mTourTitle + " Created By: " + mTourCreatedBy
+                + " Date Created: " + mDateCreated + " Date Modified: " + mDateModified;
     }
 
     /**
@@ -146,7 +153,7 @@ public class Place implements Serializable {
                 JSONObject obj = arr.getJSONObject(i);
                 Place place = new Place(obj.getInt(Place.ID), obj.getString(Place.TITLE),
                         obj.getString(Place.DESC), obj.getString(Place.INSTRUCT),
-                        obj.getDouble(Place.LAT), obj.getDouble(Place.LONG),
+                        obj.getDouble(Place.LAT), obj.getDouble(Place.LONG), obj.getString(Place.AUDIO),
                         obj.getString(Place.TOUR), obj.getString(Place.CREATED_BY),
                         obj.getString(Place.DATE_CREATED), obj.getString(Place.DATE_MOD));
                 placeList.add(place);
