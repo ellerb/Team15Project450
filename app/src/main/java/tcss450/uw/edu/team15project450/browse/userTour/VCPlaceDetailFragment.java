@@ -1,13 +1,17 @@
 package tcss450.uw.edu.team15project450.browse.userTour;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import tcss450.uw.edu.team15project450.R;
 import tcss450.uw.edu.team15project450.model.Place;
@@ -28,7 +32,6 @@ public class VCPlaceDetailFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -44,7 +47,47 @@ public class VCPlaceDetailFragment extends Fragment {
                 getActivity().findViewById(R.id.fab);
         floatingActionButton.hide();
 
+        String tourTitle = "";
+        String title = "";
+        String description = "";
+
+        Bundle args = getArguments();
+        if (args != null) {
+            // Set article based on argument passed in
+            tourTitle = getTourTitle((Place) args.getSerializable(PLACE_ITEM_SELECTED));
+            title = getTitle((Place) args.getSerializable(PLACE_ITEM_SELECTED));
+            description = getDescription((Place) args.getSerializable(PLACE_ITEM_SELECTED));
+        }
+
+        final String emailBody = tourTitle + "\n\n" + title + "\n" + description;
+
+        Button emailBtn = (Button) view.findViewById(R.id.shareEmail);
+        emailBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_SUBJECT, "My tour from StoryTour");
+                intent.putExtra(Intent.EXTRA_TEXT, emailBody);
+                intent.setData(Uri.parse("mailto:"));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+
         return view;
+    }
+
+    public String getTourTitle(Place place) {
+        return place.getTourTitle();
+    }
+
+    public String getDescription(Place place) {
+        return place.getDescription();
+    }
+
+    public String getTitle(Place place) {
+        return place.getTitle();
     }
 
     public void updateView(Place place) {
@@ -70,5 +113,6 @@ public class VCPlaceDetailFragment extends Fragment {
             updateView((Place) args.getSerializable(PLACE_ITEM_SELECTED));
         }
     }
+
 
 }

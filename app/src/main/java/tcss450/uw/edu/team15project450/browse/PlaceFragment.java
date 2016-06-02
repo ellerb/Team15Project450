@@ -2,6 +2,7 @@ package tcss450.uw.edu.team15project450.browse;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -60,6 +61,10 @@ public class PlaceFragment extends Fragment {
                 mRecyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
         }
+
+        // to hide the floating action button
+        FloatingActionButton floatingActionButton = (FloatingActionButton) getActivity().findViewById(R.id.fabMap);
+        floatingActionButton.hide();
 
         Bundle args = getArguments();
         if (args != null) {

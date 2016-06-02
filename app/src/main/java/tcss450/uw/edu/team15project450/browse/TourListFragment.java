@@ -3,6 +3,7 @@ package tcss450.uw.edu.team15project450.browse;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -72,6 +73,10 @@ public class TourListFragment extends Fragment {
                 mRecyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
         }
+
+        // to hide the floating action button
+        FloatingActionButton floatingActionButton = (FloatingActionButton) getActivity().findViewById(R.id.fabMap);
+        floatingActionButton.hide();
 
         DownloadToursTask task = new DownloadToursTask();
         task.execute(new String[]{TOUR_URL});

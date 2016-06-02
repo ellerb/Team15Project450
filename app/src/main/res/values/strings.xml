@@ -72,7 +72,8 @@
     <string name="reg_name_hint">Enter your name</string>
     <string name="reg_add_user_btn">REGISTER</string>
 
-    <string name="add_place_txt">ADD PLACE</string>
-
+    <string name="share_email_txt">Share Via Email</string>
+    <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_locations">LocationsActivity</string>
 
 </resources>

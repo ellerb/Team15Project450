@@ -2,6 +2,7 @@ package tcss450.uw.edu.team15project450.browse.userTour;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import tcss450.uw.edu.team15project450.R;
@@ -68,9 +70,8 @@ public class VCPlaceFragment extends Fragment {
         final Bundle bundle = getArguments();
 
 
-        String mTour = getTourTitle ((Tour) bundle.getSerializable(TOUR_ITEM_SELECTED));
-        String mCreatedBy = getCreatedBy ((Tour) bundle.getSerializable(TOUR_ITEM_SELECTED));
-
+        final String mTour = getTourTitle ((Tour) bundle.getSerializable(TOUR_ITEM_SELECTED));
+        final String mCreatedBy = getCreatedBy ((Tour) bundle.getSerializable(TOUR_ITEM_SELECTED));
         FloatingActionButton floatingActionButton = (FloatingActionButton)
                 getActivity().findViewById(R.id.fab);
         floatingActionButton.show();
@@ -79,11 +80,7 @@ public class VCPlaceFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity().getApplicationContext(), AddPlaceActivity.class);
-                //bundle.putString
-                i.putExtras(bundle);
-                startActivity(i);
-                getActivity().finish();
+
             }
         });
 
@@ -93,6 +90,7 @@ public class VCPlaceFragment extends Fragment {
             getPlaceList((Tour) args.getSerializable(TOUR_ITEM_SELECTED));
             mRecyclerView.setAdapter(new MyVCPlaceRecyclerViewAdapter(placeList, mListener));
         }
+
         return view;
     }
 

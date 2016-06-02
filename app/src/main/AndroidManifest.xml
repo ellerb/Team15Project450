@@ -26,7 +26,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".creation.CreateTourActivity"
             android:label="Create a Tour" />
@@ -45,7 +45,15 @@
         </activity>
         <activity android:name=".server.UploadFileActivity" />
         <activity android:name=".creation.AddPlaceActivity" />
-        <activity android:name=".listen.ListenActivity"></activity>
+        <activity android:name=".listen.ListenActivity" />
+        <activity
+            android:name=".Maps.MapActivity"
+            android:label="@string/title_activity_map"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Maps.LocationsActivity"
+            android:label="@string/title_activity_locations"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
