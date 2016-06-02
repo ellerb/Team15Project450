@@ -2,6 +2,7 @@ package tcss450.uw.edu.team15project450.browse.userTour;
 
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +24,6 @@ public class VCPlaceDetailFragment extends Fragment {
 
     public static String PLACE_ITEM_SELECTED = "PlaceItemSelected";
 
-
     public VCPlaceDetailFragment() {
         // Required empty public constructor
     }
@@ -38,6 +38,11 @@ public class VCPlaceDetailFragment extends Fragment {
         mPlaceDescription = (TextView) view.findViewById(R.id.vc_place_item_desc);
         mPlaceLatitude = (TextView) view.findViewById(R.id.vc_place_item_latitude);
         mPlaceLongitude = (TextView) view.findViewById(R.id.vc_place_item_longitude);
+
+        // to hide the floating action button
+        FloatingActionButton floatingActionButton = (FloatingActionButton)
+                getActivity().findViewById(R.id.fab);
+        floatingActionButton.hide();
 
         return view;
     }

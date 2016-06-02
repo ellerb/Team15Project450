@@ -44,7 +44,7 @@ import java.net.URLEncoder;
 import tcss450.uw.edu.team15project450.MainActivity;
 import tcss450.uw.edu.team15project450.R;
 import tcss450.uw.edu.team15project450.authenticate.SignInActivity;
-import tcss450.uw.edu.team15project450.browse.ViewCreatedToursActivity;
+import tcss450.uw.edu.team15project450.browse.userTour.ViewCreatedToursActivity;
 import tcss450.uw.edu.team15project450.server.Upload;
 
 public class AddPlaceActivity extends AppCompatActivity

@@ -3,6 +3,7 @@ package tcss450.uw.edu.team15project450.browse.userTour;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -35,6 +36,10 @@ public class ViewCreatedToursActivity extends AppCompatActivity implements
                     .add(R.id.browse_vc_tours_container, vcTourListFragment)
                     .commit();
         }
+
+        // to hide the floating action button
+        FloatingActionButton floatingActionButton = (FloatingActionButton)findViewById(R.id.fab);
+        floatingActionButton.hide();
     }
 
     @Override
