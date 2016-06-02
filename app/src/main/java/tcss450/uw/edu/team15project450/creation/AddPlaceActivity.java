@@ -88,9 +88,16 @@ public class AddPlaceActivity extends AppCompatActivity
         setContentView(R.layout.activity_add_place);
 
         mBundle = getIntent().getExtras();
-        mUserID = mBundle.getString("userid");
-        mTour = mBundle.getString("tour");
-        mType = mBundle.getString("type");
+        if (mBundle != null) {
+            mUserID = mBundle.getString("userid");
+            mTour = mBundle.getString("tour");
+            mBundle.putString("type", TYPE);
+        } else {
+            Toast.makeText(this, "Unable to add a place: not enough information.", Toast.LENGTH_SHORT)
+                    .show();
+            callMain();
+        }
+        mType = TYPE;
 
         callAddPlaceFragment();
     }
@@ -160,9 +167,9 @@ public class AddPlaceActivity extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
-                mFragmentType = PICKER;
                 Place place = PlacePicker.getPlace(data, this);
 
+                mFragmentType = PICKER;
                 mLatLong = place.getLatLng();
                 mLatitude = mLatLong.latitude;
                 mLongitude = mLatLong.longitude;
@@ -206,7 +213,7 @@ public class AddPlaceActivity extends AppCompatActivity
                     AddPlaceTask task = new AddPlaceTask();
                     task.execute(new String[]{url.toString()});
                 } else {
-                    Toast.makeText(this, "No network connection available. Cannot add place.", Toast.LENGTH_SHORT)
+                    Toast.makeText(this, "No network connection available. Cannot add coordinates.", Toast.LENGTH_SHORT)
                             .show();
                     return;
                 }
@@ -378,9 +385,11 @@ public class AddPlaceActivity extends AppCompatActivity
                         Log.d(TAG, "Source file: " + mOutputFilePath);
 
                         // Set the file userid/activity_type/tour_title/place_title)
-                        Upload file = new Upload(mUserID, TYPE, mTour, mPlace);
+                        Log.d(TAG, "Type: " + mType);
+                        Upload file = new Upload(mUserID, mType, mTour, mPlace);
 
-                        file.Send(fis);
+                        response = file.Send(fis);
+                        Log.d(TAG, response);
 
                     } catch (FileNotFoundException e) {
                         // Error: File not found
@@ -389,25 +398,28 @@ public class AddPlaceActivity extends AppCompatActivity
                         Log.d(TAG, response);
                     }
                 }
-                try {
-                    URL urlObject = new URL(url);
-                    urlConnection = (HttpURLConnection) urlObject.openConnection();
+                if (response.equals("success") || mFragmentType.equals(PLACE) || mFragmentType.equals(PICKER)) {
+                    response = "";
+                    try {
+                        URL urlObject = new URL(url);
+                        urlConnection = (HttpURLConnection) urlObject.openConnection();
 
-                    InputStream content = urlConnection.getInputStream();
+                        InputStream content = urlConnection.getInputStream();
 
-                    BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
-                    String s = "";
-                    while ((s = buffer.readLine()) != null) {
-                        response += s;
+                        BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
+                        String s = "";
+                        while ((s = buffer.readLine()) != null) {
+                            response += s;
+                        }
+                        Log.i(TAG, "Response: " + s);
+
+                    } catch (Exception e) {
+                        response = "Unable to create, Reason: "
+                                + e.getMessage();
+                    } finally {
+                        if (urlConnection != null)
+                            urlConnection.disconnect();
                     }
-                    Log.i(TAG,"Response: " + s);
-
-                } catch (Exception e) {
-                    response = "Unable to create, Reason: "
-                            + e.getMessage();
-                } finally {
-                    if (urlConnection != null)
-                        urlConnection.disconnect();
                 }
             }
             return response;

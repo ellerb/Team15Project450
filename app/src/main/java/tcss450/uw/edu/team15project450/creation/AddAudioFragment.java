@@ -91,6 +91,14 @@ public class AddAudioFragment extends Fragment {
         if (!tourFile.exists()) {
             tourFile.mkdirs();
         }
+        if(mType == PLACE) {
+            File placeFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
+                    + "/" + appName + "/" + mTour, mPlace);
+
+            if (!placeFile.exists()) {
+                placeFile.mkdirs();
+            }
+        }
 
         mOutputFile = Environment.getExternalStorageDirectory().getAbsolutePath();
         mServerFilePath = getString(R.string.base_server_url);

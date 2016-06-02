@@ -34,15 +34,11 @@ public class AddPlaceFragment extends Fragment {
 
     private final static String ADD_PLACE_URL
             = "http://cssgate.insttech.washington.edu/~_450atm15/addPlace.php?";
-    private static final int RESULT_OK = 1;
-    int PLACE_PICKER_REQUEST = 1;
 
     private AddPlaceListener mListener;
     private EditText mTitle;
     private EditText mDescription;
     private EditText mInstruction;
-    private EditText mLongitude;
-    private EditText mLatitude;
     private CheckBox mHasAudio;
     private CheckBox mHasImage;
     private String mCreatedBy;
