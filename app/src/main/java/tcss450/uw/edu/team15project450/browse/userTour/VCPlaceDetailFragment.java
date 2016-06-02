@@ -1,11 +1,16 @@
 package tcss450.uw.edu.team15project450.browse.userTour;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +18,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import tcss450.uw.edu.team15project450.Maps.MapActivity;
 import tcss450.uw.edu.team15project450.R;
+import tcss450.uw.edu.team15project450.creation.AddImageFragment;
+import tcss450.uw.edu.team15project450.creation.AddPlaceActivity;
+import tcss450.uw.edu.team15project450.listen.AudioListenFragment;
 import tcss450.uw.edu.team15project450.model.Place;
 
 /**
@@ -21,8 +30,11 @@ import tcss450.uw.edu.team15project450.model.Place;
  */
 public class VCPlaceDetailFragment extends Fragment {
 
+    private AudioListenListener mListener;
+    Bundle mArgs;
     private TextView mPlaceTitle;
     private TextView mPlaceDescription;
+    private TextView mPlaceInstruction;
     private TextView mPlaceLatitude;
     private TextView mPlaceLongitude;
 
@@ -39,6 +51,7 @@ public class VCPlaceDetailFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_vcplace_detail, container, false);
         mPlaceTitle = (TextView) view.findViewById(R.id.vc_place_item_title);
         mPlaceDescription = (TextView) view.findViewById(R.id.vc_place_item_desc);
+        mPlaceInstruction = (TextView) view.findViewById(R.id.vc_place_item_instruct);
         mPlaceLatitude = (TextView) view.findViewById(R.id.vc_place_item_latitude);
         mPlaceLongitude = (TextView) view.findViewById(R.id.vc_place_item_longitude);
 
@@ -50,13 +63,20 @@ public class VCPlaceDetailFragment extends Fragment {
         String tourTitle = "";
         String title = "";
         String description = "";
+        String instruction = "";
 
-        Bundle args = getArguments();
-        if (args != null) {
+        mArgs = getArguments();
+
+        // get latitude and longitude
+        final double mLatitude = getLatitude((Place) mArgs.getSerializable(PLACE_ITEM_SELECTED));
+        final double mLongitude = getLongitude((Place) mArgs.getSerializable(PLACE_ITEM_SELECTED));
+
+        if (mArgs != null) {
             // Set article based on argument passed in
-            tourTitle = getTourTitle((Place) args.getSerializable(PLACE_ITEM_SELECTED));
-            title = getTitle((Place) args.getSerializable(PLACE_ITEM_SELECTED));
-            description = getDescription((Place) args.getSerializable(PLACE_ITEM_SELECTED));
+            tourTitle = getTourTitle((Place) mArgs.getSerializable(PLACE_ITEM_SELECTED));
+            title = getTitle((Place) mArgs.getSerializable(PLACE_ITEM_SELECTED));
+            description = getDescription((Place) mArgs.getSerializable(PLACE_ITEM_SELECTED));
+            instruction = getInstruction((Place) mArgs.getSerializable(PLACE_ITEM_SELECTED));
         }
 
         final String emailBody = tourTitle + "\n\n" + title + "\n" + description;
@@ -75,6 +95,29 @@ public class VCPlaceDetailFragment extends Fragment {
             }
         });
 
+        Button launchAudioPlayer = (Button) view.findViewById(R.id.launch_audio);
+        launchAudioPlayer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.listenAudio(mArgs);
+            }
+        });
+
+        FloatingActionButton mapFloatingActionButton = (FloatingActionButton)
+                getActivity().findViewById(R.id.fabMap);
+        mapFloatingActionButton.show();
+
+        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fabMap);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(view.getContext(), MapActivity.class);
+                i.putExtra(MapActivity.LATITUDE, mLatitude);
+                i.putExtra(MapActivity.LONGITUDE, mLongitude);
+                startActivity(i);
+            }
+        });
+
         return view;
     }
 
@@ -90,10 +133,21 @@ public class VCPlaceDetailFragment extends Fragment {
         return place.getTitle();
     }
 
+    public String getInstruction(Place place) {
+        return place.getInstruction();
+    }
+
+    public double getLatitude(Place place) { return place.getLatitude(); }
+
+    public double getLongitude(Place place) {
+        return place.getLongitude();
+    }
+
     public void updateView(Place place) {
         if (place != null) {
-            mPlaceTitle.setText(place.getTitle());
-            mPlaceDescription.setText(place.getDescription());
+            mPlaceTitle.setText("Place: " + place.getTitle());
+            mPlaceDescription.setText("Description: " + place.getDescription());
+            mPlaceInstruction.setText("Instructions: " + place.getInstruction());
             //mPlaceLatitude.setText(place.getLatitude());
             //mPlaceLongitude.setText(place.getLongitude());
         }
@@ -112,6 +166,33 @@ public class VCPlaceDetailFragment extends Fragment {
             // Set article based on argument passed in
             updateView((Place) args.getSerializable(PLACE_ITEM_SELECTED));
         }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof AudioListenListener) {
+            mListener = (AudioListenListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement AddAudioListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     */
+    public interface AudioListenListener {
+        void listenAudio(Bundle args);
     }
 
 

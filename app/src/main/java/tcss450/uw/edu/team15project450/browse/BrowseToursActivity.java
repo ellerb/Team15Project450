@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import tcss450.uw.edu.team15project450.R;
 import tcss450.uw.edu.team15project450.authenticate.SignInActivity;
+import tcss450.uw.edu.team15project450.listen.AudioListenFragment;
 import tcss450.uw.edu.team15project450.model.Place;
 import tcss450.uw.edu.team15project450.model.Tour;
 
@@ -22,8 +23,10 @@ import tcss450.uw.edu.team15project450.model.Tour;
  * @author Gabrielle Bly, Gabrielle Glynn
  * @version May 4, 2016
  */
-public class BrowseToursActivity extends AppCompatActivity implements TourListFragment.OnListFragmentInteractionListener,
-    PlaceFragment.OnPlaceListFragmentInteractionListener {
+public class BrowseToursActivity extends AppCompatActivity implements
+        TourListFragment.OnListFragmentInteractionListener,
+        PlaceFragment.OnPlaceListFragmentInteractionListener,
+        PlaceDetailFragment.AudioListenListener  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +71,15 @@ public class BrowseToursActivity extends AppCompatActivity implements TourListFr
                 .addToBackStack(null)
                 .commit();
 
+    }
+
+    @Override
+    public void listenAudio(Bundle args) {
+        AudioListenFragment audioListenFragment = new AudioListenFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.browse_tours_container, audioListenFragment)
+                .addToBackStack(null)
+                .commit();
     }
 
 

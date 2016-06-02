@@ -18,6 +18,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/vc_place_item_instruct" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/vc_place_item_latitude" />
 
     <TextView
@@ -26,9 +31,18 @@
         android:id="@+id/vc_place_item_longitude" />
 
     <Button
+        android:id="@+id/launch_audio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/launch_audio_button"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:text="@string/share_email_txt"
         android:id="@+id/shareEmail"
         android:onClick="shareViaEmail" />

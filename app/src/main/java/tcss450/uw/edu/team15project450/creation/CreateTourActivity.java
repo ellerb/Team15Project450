@@ -401,7 +401,7 @@ public class CreateTourActivity extends AppCompatActivity
                         } else if (mHasImage) {
                             callAddImageFragment();
                         } else {
-                            callViewCreatedTours();
+                            callAddPlaceActivity();
                         }
                     } else if (mFragmentType.equals(AUDIO)) {
                         Toast.makeText(getApplicationContext(), "Audio successfully added!"
@@ -417,8 +417,7 @@ public class CreateTourActivity extends AppCompatActivity
                         Toast.makeText(getApplicationContext(), "Image successfully added!"
                                 , Toast.LENGTH_SHORT)
                                 .show();
-
-                        callMain();
+                        callAddPlaceActivity();
                     } else {
                         Toast.makeText(getApplicationContext(), "Successfully added!"
                                 , Toast.LENGTH_SHORT)

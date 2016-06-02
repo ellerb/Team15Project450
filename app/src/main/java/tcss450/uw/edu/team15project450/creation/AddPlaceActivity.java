@@ -97,6 +97,11 @@ public class AddPlaceActivity extends AppCompatActivity
                     .show();
             callMain();
         }
+        if (mUserID==null || mTour == null) {
+            Toast.makeText(this, "Unable to add a place: not enough information.", Toast.LENGTH_SHORT)
+                    .show();
+            callMain();
+        }
         mType = TYPE;
 
         callAddPlaceFragment();

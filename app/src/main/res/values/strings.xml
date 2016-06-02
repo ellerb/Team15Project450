@@ -50,6 +50,11 @@
     <string name="stopped_message">Recording stopped...</string>
     <string name="stopped_toast">Recording stopped...</string>
 
+    <string name="pause_button">PAUSE</string>
+    <string name="play_button">PLAY</string>
+    <string name="launch_audio_button">LAUNCH AUDIO PLAYER</string>
+    <string name="play_audio">Press Record to Begin</string>
+
     <!--For the AddAudioFragment-->
     <string name="uploading_text">Uploading file to server...</string>
 
@@ -75,5 +80,7 @@
     <string name="share_email_txt">Share Via Email</string>
     <string name="title_activity_map">MapActivity</string>
     <string name="title_activity_locations">LocationsActivity</string>
+
+    <string name="add_place_txt">ADD PLACE</string>
 
 </resources>

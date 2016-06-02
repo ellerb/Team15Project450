@@ -236,9 +236,10 @@ public class SignInActivity extends AppCompatActivity
 
                     addUserToLoginFile();
 
-                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(i);
-                    finish();
+                    LoginFragment loginFragment = new LoginFragment();
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, loginFragment)
+                            .commit();
 
                 } else {
                     Toast.makeText(getApplicationContext(), "Failed to register: " + jsonObject.get("error"),
