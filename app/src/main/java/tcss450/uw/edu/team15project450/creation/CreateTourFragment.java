@@ -29,6 +29,7 @@ import tcss450.uw.edu.team15project450.R;
  */
 public class CreateTourFragment extends Fragment {
 
+    private static final String TAG = "CreateTourFragment";
     private final static String CREATE_BASIC_TOUR_URL
             = "http://cssgate.insttech.washington.edu/~_450atm15/createBasicTour.php?";
 
@@ -183,7 +184,7 @@ public class CreateTourFragment extends Fragment {
             sb.append("&userid=");
             sb.append(URLEncoder.encode(userid, "UTF-8"));
 
-            Log.i("CreateTourFragment", sb.toString());
+            Log.i(TAG, sb.toString());
 
         }
         catch(Exception e) {
