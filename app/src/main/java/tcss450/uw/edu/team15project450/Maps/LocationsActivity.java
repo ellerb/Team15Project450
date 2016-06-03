@@ -7,13 +7,11 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -25,6 +23,9 @@ import com.google.android.gms.location.LocationServices;
 
 import tcss450.uw.edu.team15project450.R;
 
+/**
+ * This activity is to be used when dealing with locations.
+ */
 public class LocationsActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
@@ -45,7 +46,6 @@ public class LocationsActivity extends AppCompatActivity implements
     private LocationRequest mLocationRequest;
     private Location mCurrentLocation;
 
-
     private GoogleApiClient mGoogleApiClient;
 
     @Override
@@ -54,13 +54,6 @@ public class LocationsActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_locations);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-      /*  if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment, new MyLocationsActivityFragment())
-                    .commit();
-        }*/
-
 
         // Create an instance of GoogleAPIClient.
         if (mGoogleApiClient == null) {
@@ -73,14 +66,10 @@ public class LocationsActivity extends AppCompatActivity implements
 
         mLocationRequest = new LocationRequest();
 
-// Sets the desired interval for active location updates. This interval is
-// inexact. You may not receive updates at all if no location sources are available, or
-// you may receive them slower than requested. You may also receive updates faster than
-// requested if other applications are requesting location at a faster interval.
+        // Sets the desired interval for active location updates.
         mLocationRequest.setInterval(UPDATE_INTERVAL_IN_MILLISECONDS);
 
-// Sets the fastest rate for active location updates. This interval is exact, and your
-// application will never receive updates faster than this value.
+        // Sets the fastest rate for active location updates.
         mLocationRequest.setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS);
 
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);

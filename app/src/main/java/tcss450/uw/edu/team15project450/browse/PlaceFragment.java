@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A fragment representing a list of Items.
+ * A fragment representing a list of Places.
  * <p>
  * Activities containing this fragment MUST implement the {@link OnPlaceListFragmentInteractionListener}
  * interface.
@@ -34,10 +34,6 @@ public class PlaceFragment extends Fragment {
     public static String TOUR_ITEM_SELECTED = "TourItemSelected";
     ArrayList<Place> placeList = new ArrayList<>();
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
     public PlaceFragment() {
     }
 
@@ -105,10 +101,6 @@ public class PlaceFragment extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnPlaceListFragmentInteractionListener {
         void onPlaceListFragmentInteraction(Place item);

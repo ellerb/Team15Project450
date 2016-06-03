@@ -12,6 +12,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import tcss450.uw.edu.team15project450.R;
 
+/**
+ * This activity allows a location to be opened in Maps.
+ */
 public class MapActivity  extends AppCompatActivity implements OnMapReadyCallback {
 
     public static final String LATITUDE = "lat";

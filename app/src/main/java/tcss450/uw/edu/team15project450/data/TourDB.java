@@ -11,6 +11,10 @@ import java.util.List;
 
 import tcss450.uw.edu.team15project450.model.Tour;
 
+/**
+ * This class saves data to the device's storage using SQLite
+ */
+
 public class TourDB {
 
     public static final int DB_VERSION = 1;
@@ -25,6 +29,19 @@ public class TourDB {
         mSQLiteDatabase = mTourDBHelper.getWritableDatabase();
     }
 
+    /**
+     * Inserts the tour into the local SQLite table. Returns true if successful, false otherwise.
+     *
+     * @param title
+     * @param createdBy
+     * @param description
+     * @param bPublic
+     * @param bPublished
+     * @param dateCreated
+     * @param dateModified
+     * @param audio
+     * @return
+     */
     public boolean insertTour(String title, String createdBy, String description, boolean bPublic, boolean bPublished,
                               String dateCreated, String dateModified, String audio) {
         ContentValues contentValues = new ContentValues();
@@ -41,6 +58,10 @@ public class TourDB {
         return rowId != -1;
     }
 
+    /**
+     * Returns the list of tours from the local Tour table.
+     * @return
+     */
     public List<Tour> getTours() {
         String[] columns = {"title", "createdBy", "description", "bPublic", "bPublished", "dateCreated", "dateModified", "audio"};
 

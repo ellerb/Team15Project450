@@ -41,7 +41,6 @@ public class ViewCreatedTourListFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private List<Tour> tourList;
     private int mColumnCount = 1;
-
     private OnListFragmentInteractionListener mListener;
 
     /**

@@ -1,37 +1,28 @@
 package tcss450.uw.edu.team15project450.browse.userTour;
 
-
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import tcss450.uw.edu.team15project450.Maps.MapActivity;
 import tcss450.uw.edu.team15project450.R;
-import tcss450.uw.edu.team15project450.creation.AddImageFragment;
-import tcss450.uw.edu.team15project450.creation.AddPlaceActivity;
-import tcss450.uw.edu.team15project450.listen.AudioListenFragment;
 import tcss450.uw.edu.team15project450.model.Place;
 
 /**
- * A simple {@link Fragment} subclass.
+ * This fragment is used to retrieve the details of a tour's place
  */
 public class VCPlaceDetailFragment extends Fragment {
 
     private AudioListenListener mListener;
-    Bundle mArgs;
+    private Bundle mArgs;
     private TextView mPlaceTitle;
     private TextView mPlaceDescription;
     private TextView mPlaceInstruction;
@@ -148,8 +139,6 @@ public class VCPlaceDetailFragment extends Fragment {
             mPlaceTitle.setText("Place: " + place.getTitle());
             mPlaceDescription.setText("Description: " + place.getDescription());
             mPlaceInstruction.setText("Instructions: " + place.getInstruction());
-            //mPlaceLatitude.setText(place.getLatitude());
-            //mPlaceLongitude.setText(place.getLongitude());
         }
     }
 
@@ -194,6 +183,4 @@ public class VCPlaceDetailFragment extends Fragment {
     public interface AudioListenListener {
         void listenAudio(Bundle args);
     }
-
-
 }

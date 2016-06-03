@@ -132,10 +132,6 @@ public class TourListFragment extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
         void onListFragmentInteraction(Tour item);
@@ -193,8 +189,7 @@ public class TourListFragment extends Fragment {
             if (!mTourList.isEmpty()) {
                 mRecyclerView.setAdapter(new MyTourRecyclerViewAdapter(mTourList, mListener));
 
-                // modify the code for method onPostExecute to reload the
-                // database from the network if it’s available.
+                // reload the database from the network if it’s available.
                 if (mTourDB == null) {
                     mTourDB = new TourDB(getActivity());
                 }
@@ -203,7 +198,7 @@ public class TourListFragment extends Fragment {
                 // database with the network data.
                 mTourDB.deleteTours();
 
-                // Also, add to the local database
+                // add to the local database
                 for (int i = 0; i < mTourList.size(); i++) {
                     Tour tour = mTourList.get(i);
                     mTourDB.insertTour(tour.getTitle(),

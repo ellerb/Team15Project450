@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A fragment representing a list of Items.
+ * A fragment representing a list of Places of a Tour.
  * <p>
  * Activities containing this fragment MUST implement the {@link OnPlaceListFragmentInteractionListener}
  * interface.

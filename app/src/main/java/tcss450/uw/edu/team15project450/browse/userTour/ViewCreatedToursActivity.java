@@ -16,11 +16,10 @@ import tcss450.uw.edu.team15project450.model.Place;
 import tcss450.uw.edu.team15project450.model.Tour;
 
 /**
- * This activity is currently a shell to be implemented later. Will allow
- * a user to see all the tours they have created and select them to edit.
+ * This activity is is responsible for retrieving the list of tours that a specific user has created.
  *
  * @author Gabrielle Bly, Gabrielle Glynn
- * @version May 4, 2016
+ * @version June 3, 2016
  */
 public class ViewCreatedToursActivity extends AppCompatActivity implements
         ViewCreatedTourListFragment.OnListFragmentInteractionListener,

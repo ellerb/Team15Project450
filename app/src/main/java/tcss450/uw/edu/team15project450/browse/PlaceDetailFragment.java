@@ -19,7 +19,7 @@ import tcss450.uw.edu.team15project450.model.Place;
 import tcss450.uw.edu.team15project450.model.Tour;
 
 /**
- * A simple {@link Fragment} subclass.
+ * This fragment retrieves of details of a place from a tour.
  */
 public class PlaceDetailFragment extends Fragment {
 

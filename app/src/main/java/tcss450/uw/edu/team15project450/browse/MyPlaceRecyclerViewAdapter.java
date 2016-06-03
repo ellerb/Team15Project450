@@ -1,6 +1,5 @@
 package tcss450.uw.edu.team15project450.browse;
 
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +15,6 @@ import java.util.List;
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Place} and makes a call to the
  * specified {@link OnPlaceListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
  */
 public class MyPlaceRecyclerViewAdapter extends RecyclerView.Adapter<MyPlaceRecyclerViewAdapter.ViewHolder> {
 

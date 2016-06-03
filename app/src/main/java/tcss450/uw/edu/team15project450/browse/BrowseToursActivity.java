@@ -17,8 +17,7 @@ import tcss450.uw.edu.team15project450.model.Place;
 import tcss450.uw.edu.team15project450.model.Tour;
 
 /**
- * This activity is currently a shell to be implemented later. Will allow
- * a user to browse and select available tours to download and take.
+ * This activity is responsible for retrieving the list of all tours.
  *
  * @author Gabrielle Bly, Gabrielle Glynn
  * @version May 4, 2016
