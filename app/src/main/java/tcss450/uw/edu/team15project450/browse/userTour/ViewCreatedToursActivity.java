@@ -11,6 +11,7 @@ import android.view.MenuItem;
 
 import tcss450.uw.edu.team15project450.R;
 import tcss450.uw.edu.team15project450.authenticate.SignInActivity;
+import tcss450.uw.edu.team15project450.listen.AudioListenFragment;
 import tcss450.uw.edu.team15project450.model.Place;
 import tcss450.uw.edu.team15project450.model.Tour;
 
@@ -23,7 +24,8 @@ import tcss450.uw.edu.team15project450.model.Tour;
  */
 public class ViewCreatedToursActivity extends AppCompatActivity implements
         ViewCreatedTourListFragment.OnListFragmentInteractionListener,
-        VCPlaceFragment.OnPlaceListFragmentInteractionListener {
+        VCPlaceFragment.OnPlaceListFragmentInteractionListener,
+        VCPlaceDetailFragment.AudioListenListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,10 @@ public class ViewCreatedToursActivity extends AppCompatActivity implements
         // to hide the floating action button
         FloatingActionButton floatingActionButton = (FloatingActionButton)findViewById(R.id.fab);
         floatingActionButton.hide();
+
+        // to hide the floating action button
+        FloatingActionButton mapFloatingActionButton = (FloatingActionButton)findViewById(R.id.fabMap);
+        mapFloatingActionButton.hide();
     }
 
     @Override
@@ -64,6 +70,15 @@ public class ViewCreatedToursActivity extends AppCompatActivity implements
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.browse_vc_tours_container, placeDetailFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
+    public void listenAudio(Bundle args) {
+        AudioListenFragment audioListenFragment = new AudioListenFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.browse_vc_tours_container, audioListenFragment)
                 .addToBackStack(null)
                 .commit();
     }

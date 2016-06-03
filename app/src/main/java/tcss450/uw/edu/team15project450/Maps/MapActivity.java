@@ -42,7 +42,7 @@ public class MapActivity  extends AppCompatActivity implements OnMapReadyCallbac
         //LatLng latLng = new LatLng(47.2529, -122.4443);
         LatLng latLng = new LatLng(mLat, mLng);
         mGoogleMap.addMarker(new MarkerOptions().position(latLng));
-        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
     }
 
 }
