@@ -46,6 +46,18 @@ public class Tour implements Serializable {
         setDateModified(dateModified);
     }
 
+    public Tour(String title, String description, String audioFilePath, boolean isPublic,
+            boolean isPublished, String createdBy,String dateCreated, String dateModified) {
+        setTitle(title);
+        setDescription(description);
+        mAudioFilePath = audioFilePath;
+        mIsPublic = isPublic;
+        mIsPublished = isPublished;
+        setCreatedBy(createdBy);
+        setDateCreated(dateCreated);
+        setDateModified(dateModified);
+    }
+
     public String getTitle() { return mTitle; }
 
     public void setTitle(String title) {

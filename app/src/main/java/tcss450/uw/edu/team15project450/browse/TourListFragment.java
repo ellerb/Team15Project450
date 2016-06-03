@@ -1,6 +1,8 @@
 package tcss450.uw.edu.team15project450.browse;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import tcss450.uw.edu.team15project450.R;
+import tcss450.uw.edu.team15project450.data.TourDB;
 import tcss450.uw.edu.team15project450.model.Place;
 import tcss450.uw.edu.team15project450.model.Tour;
 
@@ -39,8 +42,8 @@ public class TourListFragment extends Fragment {
             "http://cssgate.insttech.washington.edu/~_450atm15/places.php";
     private RecyclerView mRecyclerView;
 
-    private List<Tour> tourList;
-
+    private List<Tour> mTourList;
+    private TourDB mTourDB;
     private int mColumnCount = 1;
 
     private OnListFragmentInteractionListener mListener;
@@ -78,11 +81,31 @@ public class TourListFragment extends Fragment {
         FloatingActionButton floatingActionButton = (FloatingActionButton) getActivity().findViewById(R.id.fabMap);
         floatingActionButton.hide();
 
-        DownloadToursTask task = new DownloadToursTask();
-        task.execute(new String[]{TOUR_URL});
+        DownloadToursTask task;
+        DownloadPlacesTask placesTask;
 
-        DownloadPlacesTask placesTask = new DownloadPlacesTask();
-        placesTask.execute(new String[]{PLACE_URL});
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()) {
+            task = new DownloadToursTask();
+            task.execute(new String[]{TOUR_URL});
+            placesTask = new DownloadPlacesTask();
+            placesTask.execute(new String[]{PLACE_URL});
+        }
+        else {
+            Toast.makeText(view.getContext(),
+                    "No network connection available. Cannot display courses",
+                    Toast.LENGTH_SHORT) .show();
+        }
+
+
+        if (mTourDB == null) {
+            mTourDB = new TourDB(getActivity());
+        }
+        if (mTourDB == null) {
+            mTourList = mTourDB.getTours();
+        }
 
         return view;
     }
@@ -157,8 +180,8 @@ public class TourListFragment extends Fragment {
                 return;
             }
 
-            tourList = new ArrayList<Tour>();
-            result = Tour.parseTourJSON(result, tourList);
+            mTourList = new ArrayList<Tour>();
+            result = Tour.parseTourJSON(result, mTourList);
             // Something wrong with the JSON returned.
             if (result != null) {
                 Toast.makeText(getActivity().getApplicationContext(), result, Toast.LENGTH_LONG)
@@ -167,8 +190,31 @@ public class TourListFragment extends Fragment {
             }
 
             // Everything is good, show the list of tours.
-            if (!tourList.isEmpty()) {
-                mRecyclerView.setAdapter(new MyTourRecyclerViewAdapter(tourList, mListener));
+            if (!mTourList.isEmpty()) {
+                mRecyclerView.setAdapter(new MyTourRecyclerViewAdapter(mTourList, mListener));
+
+                // modify the code for method onPostExecute to reload the
+                // database from the network if it’s available.
+                if (mTourDB == null) {
+                    mTourDB = new TourDB(getActivity());
+                }
+
+                // Delete old data so that you can refresh the local
+                // database with the network data.
+                mTourDB.deleteTours();
+
+                // Also, add to the local database
+                for (int i = 0; i < mTourList.size(); i++) {
+                    Tour tour = mTourList.get(i);
+                    mTourDB.insertTour(tour.getTitle(),
+                            tour.getCreatedBy(),
+                            tour.getDescription(),
+                            tour.getIsPublic(),
+                            tour.getIsPublished(),
+                            tour.getDateCreated(),
+                            tour.getDateModified(),
+                            tour.getAudioFilePath());
+                }
             }
         }
     }
@@ -221,7 +267,7 @@ public class TourListFragment extends Fragment {
                 return;
             }
 
-            for (Tour t : tourList) {
+            for (Tour t : mTourList) {
                 for (Place p : placeList) {
                     if (t.getTitle().equals(p.getTourTitle()) && (t.getCreatedBy().equals(p.getTourCreatedBy()))) {
                         //add place to t
