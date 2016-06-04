@@ -50,10 +50,10 @@
     <string name="stopped_message">Recording stopped...</string>
     <string name="stopped_toast">Recording stopped...</string>
 
-    <string name="pause_button">PAUSE</string>
+    <string name="pause_button">STOP</string>
     <string name="play_button">PLAY</string>
     <string name="launch_audio_button">LAUNCH AUDIO PLAYER</string>
-    <string name="play_audio">Press Record to Begin</string>
+    <string name="play_audio">Press Play to Begin</string>
 
     <!--For the AddAudioFragment-->
     <string name="uploading_text">Uploading file to server...</string>

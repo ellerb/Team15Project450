@@ -73,6 +73,11 @@ public class ViewCreatedTourListFragment extends Fragment {
         }
 
         // to hide the floating action button
+        FloatingActionButton mapFloatingActionButton = (FloatingActionButton)
+                getActivity().findViewById(R.id.fabMap);
+        mapFloatingActionButton.hide();
+
+        // to hide the floating action button
         FloatingActionButton floatingActionButton = (FloatingActionButton)
                 getActivity().findViewById(R.id.fab);
         floatingActionButton.hide();

@@ -75,7 +75,10 @@ public class ViewCreatedToursActivity extends AppCompatActivity implements
 
     @Override
     public void listenAudio(Bundle args) {
+        args.putString("type", "place");
         AudioListenFragment audioListenFragment = new AudioListenFragment();
+        audioListenFragment.setArguments(args);
+
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.browse_vc_tours_container, audioListenFragment)
                 .addToBackStack(null)
