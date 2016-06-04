@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -13,7 +12,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,6 +45,12 @@ import tcss450.uw.edu.team15project450.authenticate.SignInActivity;
 import tcss450.uw.edu.team15project450.browse.userTour.ViewCreatedToursActivity;
 import tcss450.uw.edu.team15project450.server.Upload;
 
+/**
+ * This class is an Activity that allows a user to add a place to their own tour.
+ * It may call up to three different fragments including: CreateTourFragment,
+ * AddAudioFragment, and AddImageFragment (not implemented). ViewCreatedTours
+ * and Main can also be called from here.
+ */
 public class AddPlaceActivity extends AppCompatActivity
         implements AddPlaceFragment.AddPlaceListener
         , AddAudioFragment.AddAudioListener
@@ -169,6 +173,14 @@ public class AddPlaceActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Handles the result of calling Google's Place Picker. Used to get the
+     * latitude and longitude of the place to store in the database.
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
@@ -287,14 +299,14 @@ public class AddPlaceActivity extends AppCompatActivity
     }
 
 
-            /**
-             * Will execute task in order to add place to the database and at this
-             * time calls MainActivity no matter the result.
-             *
-             * @param url
-             * @param hasAudio
-             * @param hasImage
-             */
+    /**
+     * Executes task and sets global based on user choices in AddPlaceFragment.
+     *
+     * @param url
+     * @param place
+     * @param hasAudio
+     * @param hasImage
+     */
     @Override
     public void addPlace(String url, String place, boolean hasAudio, boolean hasImage) {
         mFragmentType = PLACE;
@@ -317,8 +329,8 @@ public class AddPlaceActivity extends AppCompatActivity
     }
 
     /**
-     * Not fully implemented, will execute task and call AddImageFragment
-     * or AddPlaceFragment upon result depending on boolean hasImage.
+     * Will execute task and set globals depending on user choices in the
+     * AddAudioFragment.
      *
      * @param url
      */
@@ -342,8 +354,7 @@ public class AddPlaceActivity extends AppCompatActivity
     }
 
     /**
-     * Not fully implemented, will execute task and call AddPlaceFragment
-     * upon result.
+     * Not fully implemented, will execute task and set globals.
      *
      * @param url
      */
@@ -366,8 +377,11 @@ public class AddPlaceActivity extends AppCompatActivity
         }
     }
 
+
+
     /**
-     *
+     * AsyncTask handles all the listeners in AddPlaceActivity. If the url is coming
+     * from an audio or image file, the Upload class is used.
      */
     private class AddPlaceTask extends AsyncTask<String, Void, String> {
 
@@ -436,7 +450,8 @@ public class AddPlaceActivity extends AppCompatActivity
          * exception is caught. It tries to call the parse Method and checks to see if it was successful.
          * If not, it displays the exception. Since this is used by several fragments (only two
          * currently implemented) it has personalized messages based on a type variable set in the
-         * php files on the server.
+         * php files on the server. It also calls the next fragment or activity based on the globals
+         * set right before it is called by each listener.
          *
          * @param result
          */

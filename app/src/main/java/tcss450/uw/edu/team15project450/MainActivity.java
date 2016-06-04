@@ -26,7 +26,7 @@ import tcss450.uw.edu.team15project450.creation.CreateTourActivity;
  * ViewCreatedToursActivity.
  *
  * @author Gabrielle Bly, Gabrielle Glynn
- * @version May 4, 2016
+ * @version June 2, 2016
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -111,7 +111,8 @@ public class MainActivity extends AppCompatActivity {
 
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
-                    Toast.makeText(this, "Please provide permission in order to record audio."
+                    Toast.makeText(this, "Please provide permission in order to " +
+                            "record audio and store file on your phone."
                             , Toast.LENGTH_SHORT)
                             .show();
                 }

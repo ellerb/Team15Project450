@@ -38,7 +38,7 @@ public class Place implements Serializable {
             , String instruction, double latitude, double longitude
             , String audioFilePath, String tourTitle, String tourCreatedBy
             , String dateCreated, String dateModified) {
-        mPlaceID = id;
+        setID(id);
         setTitle(title);
         mDescription = description;
         mInstruction = instruction;
@@ -53,7 +53,9 @@ public class Place implements Serializable {
 
     public int getPlaceID() { return mPlaceID; }
 
-    public void setID(int id) {
+    public void setID(Integer id) {
+        if (id < 0)
+            throw new IllegalArgumentException("Place ID cannot be negative.");
         mPlaceID = id;
     }
 
@@ -76,7 +78,7 @@ public class Place implements Serializable {
     public double getLatitude() { return mLatitude; }
 
     public void setLatitude(double latitude) {
-        if (latitude > 90 || latitude < -90)
+        if (latitude >= 90 || latitude <= -90)
             throw new IllegalArgumentException("Latitude is invalid.");
         mLatitude = latitude;
     }
@@ -84,7 +86,7 @@ public class Place implements Serializable {
     public double getLongitude() { return mLongitude; }
 
     public void setLongitude(double longitude) {
-        if (longitude > 180 || longitude < -180)
+        if (longitude >= 180 || longitude <= -180)
             throw new IllegalArgumentException("Longitude is invalid.");
         mLongitude = longitude;
     }

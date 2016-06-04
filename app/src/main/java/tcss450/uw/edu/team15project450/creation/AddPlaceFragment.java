@@ -25,7 +25,9 @@ import tcss450.uw.edu.team15project450.R;
  * A fragment that will allow a user to add a place to a tour that the user created.
  * Right now implementation only includes adding one place when CreateTourActivity
  * is active. Will eventually be used to modify tours by allowing user to delete and
- * create many in a row.
+ * create many in a row. At present it will allow a user to add a place that has the
+ * same name as another in the same tour (this is a bug that should be handled in the
+ * appropriate php file).
  *
  * @author Gabrielle Bly, Gabrielle Glynn
  * @version May 4, 2016
@@ -114,12 +116,6 @@ public class AddPlaceFragment extends Fragment {
         }
     }
 
-    /**
-     * Included if statement setting boolean value to false is only
-     * for phase 1 in order to prevent the audio fragment from being called.
-     *
-     * @return
-     */
     private boolean checkIfAudio() {
         return mHasAudio.isChecked();
     }
