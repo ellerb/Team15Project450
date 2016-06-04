@@ -73,6 +73,11 @@ public class VCPlaceFragment extends Fragment {
         bundle.putString("tour", mTour);
         bundle.putString("userid", mCreatedBy);
 
+        // to hide the floating action button
+        FloatingActionButton mapFloatingActionButton = (FloatingActionButton)
+                getActivity().findViewById(R.id.fabMap);
+        mapFloatingActionButton.hide();
+
         FloatingActionButton floatingActionButton = (FloatingActionButton)
                 getActivity().findViewById(R.id.fab);
         floatingActionButton.show();

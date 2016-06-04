@@ -82,18 +82,23 @@ public class AddAudioFragment extends Fragment {
         String appName =  getString(R.string.app_name);
 
         File appFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), appName);
+        File createdByFile =new File(Environment.getExternalStorageDirectory().getAbsolutePath()
+                + "/" + appName, mCreatedBy);
         File tourFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
-                + "/" + appName, mTour);
+                + "/" + appName + "/" + mCreatedBy, mTour);
 
         if (!appFile.exists()) {
             appFile.mkdirs();
+        }
+        if (!createdByFile.exists()) {
+            createdByFile.mkdirs();
         }
         if (!tourFile.exists()) {
             tourFile.mkdirs();
         }
         if(mType == PLACE) {
             File placeFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
-                    + "/" + appName + "/" + mTour, mPlace);
+                    + "/" + appName + "/" + mCreatedBy + "/" + mTour, mPlace);
 
             if (!placeFile.exists()) {
                 placeFile.mkdirs();
@@ -105,11 +110,11 @@ public class AddAudioFragment extends Fragment {
 
         switch (mType) {
             case TOUR:
-                mOutputFile += "/" + appName + "/" + mTour + "/touraudio.3gp";
+                mOutputFile += "/" + appName + "/" + mCreatedBy + "/" + mTour + "/touraudio.3gp";
                 mServerFilePath += "/" + mCreatedBy + "/" + mTour + "/touraudio.3gp";
                 break;
             case PLACE:
-                mOutputFile += "/" + appName + "/" + mTour + "/" + mPlace + "/audio.3gp";
+                mOutputFile += "/" + appName + "/" + mCreatedBy + "/" + mTour + "/" + mPlace + "/audio.3gp";
                 mServerFilePath += "/" + mCreatedBy + "/" + mTour + "/" + mPlace + "/audio.3gp";
                 break;
             default:
