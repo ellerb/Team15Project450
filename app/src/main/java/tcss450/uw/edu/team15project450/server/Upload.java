@@ -12,7 +12,9 @@ import java.net.URLEncoder;
 import android.util.Log;
 
 /**
- * Created by Gabe on 5/30/2016.
+ * Upload will upload a file to a server path after writing it to bytes.
+ *
+ * Created by Gabe on 5/25/2016.
  */
 public class Upload implements Runnable{
 
@@ -41,7 +43,7 @@ public class Upload implements Runnable{
             Log.d(TAG, "Place: " + mPlace);
             connectURL = new URL(buildUploadURL());
         }catch(Exception ex){
-            Log.e(TAG,"URL Malformatted");
+            ex.printStackTrace();
         }
     }
 
@@ -149,9 +151,9 @@ public class Upload implements Runnable{
             response = b.toString();
             Log.i(TAG,"Response: " + response);
             dos.close();
-        } catch (MalformedURLException ex) {
-            Log.e(TAG, "URL error: " + ex.getMessage(), ex);
-            response =  ex.getMessage();
+        } catch (MalformedURLException mue) {
+            Log.e(TAG, "URL error: " + mue.getMessage(), mue);
+            response =  mue.getMessage();
         } catch (IOException ioe) {
             Log.e(TAG, "IO error: " + ioe.getMessage(), ioe);
             response =  ioe.getMessage();
@@ -161,7 +163,6 @@ public class Upload implements Runnable{
 
     @Override
     public void run() {
-        // TODO Auto-generated method stub
     }
 
     /**

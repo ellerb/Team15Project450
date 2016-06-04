@@ -12,7 +12,7 @@ import tcss450.uw.edu.team15project450.R;
 
 /**
  * A fragment that will allow users to attach an image to either a
- * tour or a place. This class is not * fully implemented; right now an
+ * tour or a place. This class is not fully implemented; right now an
  * instance is skipped by all relevant activities.
  *
  * @author Gabrielle Bly, Gabrielle Glynn

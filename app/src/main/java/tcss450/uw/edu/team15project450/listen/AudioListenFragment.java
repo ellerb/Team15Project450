@@ -26,11 +26,14 @@ import tcss450.uw.edu.team15project450.model.Place;
 import tcss450.uw.edu.team15project450.model.Tour;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * to handle interaction events.
- * Use the {@link AudioListenFragment} factory method to
- * create an instance of this fragment.
+ * A fragment that will allow users to listen to an audio file attached
+ * to a tour or a place. This class is not fully implemented; right now
+ * it is not tested for playing from a place. This fragment also only reads
+ * from a phone and not from a server. It is assumed that the file has already
+ * been downloaded in the specified location.
+ *
+ * @author Gabrielle Bly, Gabrielle Glynn
+ * @version May 31, 2016
  */
 public class AudioListenFragment extends Fragment {
 
@@ -58,13 +61,15 @@ public class AudioListenFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_audio_listen, container, false);
 
-        // to hide the floating action button
+        // to hide the floating map action button
         FloatingActionButton mapFloatingActionButton = (FloatingActionButton)
                 getActivity().findViewById(R.id.fabMap);
         mapFloatingActionButton.hide();
 
         Bundle args = getArguments();
 
+        // since fragment will not work without the args being passed, if statement is here
+        // to prevent crashes
         if (args != null && (args.getString("type") != TOUR || args.getString("type") != PLACE)) {
             mType = args.getString("type");
 
@@ -86,6 +91,7 @@ public class AudioListenFragment extends Fragment {
 
             mPlayFile = Environment.getExternalStorageDirectory().getAbsolutePath();
 
+            // setting file location to find file based on type of file being played
             switch (mType) {
                 case TOUR:
                     mPlayFile += "/" + appName + "/" + mCreatedBy + "/" + mTour + "/touraudio.3gp";
@@ -137,6 +143,7 @@ public class AudioListenFragment extends Fragment {
 
     public int getPlaceID(Place place) { return place.getPlaceID(); }
 
+    // initializes audio player in Android
     public void initializePlayer(){
         try {
             mPlayer = new MediaPlayer();
@@ -148,6 +155,7 @@ public class AudioListenFragment extends Fragment {
         }
     }
 
+    // called when audio needs to be played
     public void startPlayer() {
         try {
             mPlayer.prepare();
@@ -162,6 +170,7 @@ public class AudioListenFragment extends Fragment {
         }
     }
 
+    // called when player needs to be stopped
     public void stopPlayer() {
         try {
             if (mPlayer != null) {
@@ -178,6 +187,8 @@ public class AudioListenFragment extends Fragment {
         }
     }
 
+    // called when play button is pressed; disables play
+    // and enables stop button
     public void play(){
         if (!mIsPaused) {
             startPlayer();
@@ -193,6 +204,8 @@ public class AudioListenFragment extends Fragment {
         }
     }
 
+    // called when stop button is pressed; disables stop
+    // and enables play button
     public void stop(){
         stopPlayer();
         mText.setText("Press Play to Restart Audio...");

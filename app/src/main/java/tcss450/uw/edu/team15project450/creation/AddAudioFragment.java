@@ -21,8 +21,8 @@ import tcss450.uw.edu.team15project450.R;
 
 /**
  * A fragment that will allow users to attach an audio file to either a
- * tour or a place. This class is not * fully implemented; right now an
- * instance is skipped by all relevant activities.
+ * tour or a place. It saves the audio file to storage on a phone and sends
+ * a filepath of where it will be stored on the server through the url builder.
  *
  * @author Gabrielle Bly, Gabrielle Glynn
  * @version May 4, 2016

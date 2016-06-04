@@ -35,9 +35,9 @@ import tcss450.uw.edu.team15project450.server.Upload;
 
 /**
  * This class is an Activity that allows a user to create their own tour.
- * It may call up to four difference fragments including: CreateTourFragment,
- * AddAudioFragment (not implemented), AddPlaceFragment (not implemented), and
- * AddPlaceFragment. The basic
+ * It may call up to three different fragments including: CreateTourFragment,
+ * AddAudioFragment, and AddImageFragment (not implemented). AddPlaceActivity
+ * ViewCreatedTours, and Main can also be called from here.
  *
  * @author Gabrielle Bly, Gabrielle Glynn
  * @version May 4, 2016
@@ -133,6 +133,14 @@ public class CreateTourActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Will handle the users choices for permissions, informing them of
+     * consequences should permissions not be given.
+     *
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
@@ -158,6 +166,14 @@ public class CreateTourActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Method will look for code to indicate whether or not Upload class has
+     * succeeded or failed when called.
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request we're responding to
@@ -227,11 +243,8 @@ public class CreateTourActivity extends AppCompatActivity
     }
 
     /**
-     * Will execute task and call AddAudioFragment, AddImageFragment
-     * or AddPlaceFragment upon result depending on booleans hasAudio hasImage.
-     * Also uses parameter tourTitle to pass to AddPlaceFragment so it can store
-     * the correct reference info in the database in order to be associated with
-     * the created tour.
+     * Will set globals base on user choices in the CreateTourFragment an call the
+     * asynctask to handle those choices and send responses to the database.
      *
      * @param url
      * @param hasAudio
@@ -264,10 +277,12 @@ public class CreateTourActivity extends AppCompatActivity
     }
 
     /**
-     * Not fully implemented, will execute task and call AddImageFragment
-     * or AddPlaceFragment upon result depending on boolean hasImage.
+     * Will execute task and set globals depending on user
+     * choices and where the fragment was called from.
      *
      * @param url
+     * @param type
+     * @param outputFile
      */
     @Override
     public void addAudio(String url, String type, String outputFile) {
@@ -289,10 +304,11 @@ public class CreateTourActivity extends AppCompatActivity
     }
 
     /**
-     * Not fully implemented, will execute task and call AddPlaceFragment
-     * upon result.
+     * Not fully implemented. Will set globals and execute task.
      *
      * @param url
+     * @param type
+     * @param outputFile
      */
     @Override
     public void addImage(String url, String type, String outputFile) {
@@ -314,7 +330,8 @@ public class CreateTourActivity extends AppCompatActivity
     }
 
     /**
-     *
+     * AsyncTask handles all the listeners in CreateTourActivity. If the url is coming
+     * from an audio or image file, the Upload class is used.
      */
      private class CreateTourTask extends AsyncTask<String, Void, String> {
 
@@ -377,9 +394,10 @@ public class CreateTourActivity extends AppCompatActivity
         /**
          * It checks to see if there was a problem with the URL(Network) which is when an
          * exception is caught. It tries to call the parse Method and checks to see if it was successful.
-         * If not, it displays the exception. Since this is used by several fragments (only two
-         * currently implemented) it has personalized messages based on a type variable set in the
-         * php files on the server.
+         * If not, it displays the exception. Since this is used by several fragments it has
+         * personalized messages based on a type variable set in the php files on the server.
+         * It also calls the next fragment or activity based on the globals set right before it
+         * is called by each listener.
          *
          * @param result
          */

@@ -12,6 +12,8 @@ package tcss450.uw.edu.team15project450.server;
         import android.util.Log;
 
 /**
+ * Was not able to successfully implement Download.
+ *
  * Created by Gabe on 5/30/2016.
  */
 public class Download {
